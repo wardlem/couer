@@ -1,0 +1,6 @@
+# dependncies
+node_modules/
+
+# testing / coverage
+coverage/
+.nyc_output/

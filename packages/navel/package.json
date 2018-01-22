@@ -1,0 +1,40 @@
+{
+  "name": "navel",
+  "version": "0.1.0",
+  "description": "Application service bus for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine",
+    "coverage": "./node_modules/.bin/nyc npm test"
+  },
+  "author": "Mark Wardle <mwwardle@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "exeunt": "^1.1.1",
+    "fluture": "^7.1.2",
+    "js-yaml": "^3.10.0",
+    "merge-descriptors": "^1.0.1",
+    "obj-to-table": "^2.0.0",
+    "ps-node": "^0.1.6",
+    "ramda": "^0.24.1",
+    "uuidv4": "^0.5.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.8.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "nyc": "^11.2.1"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/**/*.spec.js"
+    ],
+    "reporter": [
+      "html",
+      "text-summary"
+    ]
+  }
+}

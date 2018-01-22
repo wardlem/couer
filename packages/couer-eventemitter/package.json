@@ -1,0 +1,15 @@
+{
+  "name": "couer-eventemitter",
+  "version": "1.0.0",
+  "description": "Flutures based event emitter intended to be used as a part of couer",
+  "main": "EventEmitter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Wardle <mwardle@robinsage.com>",
+  "license": "ISC",
+  "dependencies": {
+    "fluture": "^8.0.1",
+    "ramda": "^0.25.0"
+  }
+}

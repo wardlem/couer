@@ -1,0 +1,21 @@
+{
+  "name": "couer-odm",
+  "version": "1.0.0",
+  "description": "ODM for couer",
+  "main": "index.js",
+  "dependencies": {
+    "capture-stack-trace": "^1.0.0",
+    "debug": "^3.1.0",
+    "fluture": "^8.0.1",
+    "merge-descriptors": "^1.0.1",
+    "navel": "*",
+    "pluralize": "^7.0.0",
+    "ramda": "^0.24.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Wardle <mwwardle@gmail.com>",
+  "license": "ISC"
+}
