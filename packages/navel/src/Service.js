@@ -1,13 +1,18 @@
 const merge = require('merge-descriptors');
 const Future = require('fluture');
 const R = require('ramda');
+const uuidv4 = require('uuidv4');
 
 const ActionNotFoundError = require('./errors/ActionNotFoundError');
+const BadArgumentsError = require('./errors/BadArgumentsError');
+
 
 const createNamedFunction = require('./utils/createNamedFunction');
 const wrapFuture = require('./utils/wrapFuture');
 
 const actions$ = Symbol('actions');
+const handlers$ = Symbol('handlers');
+const handlerLookup$ = Symbol('handlerLookup');
 
 const defaultActions = [
     'registered',
@@ -47,7 +52,13 @@ merge(Service.prototype, {
         } = message;
 
         if (this.respondsTo(action)) {
-            return this[action](data, source);
+            if (this[actions$].has(action)) {
+                // normal action
+                return this[action](data, source);
+            } else {
+                // broadcast handler
+                return this[handlers$].get(action)(data, source);
+            }
         } else {
             const error = new ActionNotFoundError(`Action ${action} does not exist for ${this.name}.`, action, this.source);
 
@@ -86,16 +97,87 @@ merge(Service.prototype, {
         return this.ask('*', what, data);
     },
 
-    subscribe(channel, action, filter) {
-        if (typeof action === 'string') {
-            action = this[action].bind(this);
+    subscribe(channel, action) {
+        if (typeof channel !== 'string') {
+            // TODO: do we really want to throw?
+            throw BadArgumentsError(`${this.constructor.name}#subscribe expects a channel as a string for its first parameter`);
+        }
+
+        if (typeof action === 'function') {
+            // we generate a pseudo-action for the service
+            action = this._registerSubscriptionHandler(action);
+        }
+
+        if (typeof action !== 'string' || !this.respondsTo(action)) {
+            // TODO: do we really want to throw?
+            throw BadArgumentsError(`${this.constructor.name}#subscribe expects a valid action name or a function as its second parameter`);
         }
 
         return this.tell(this._outbox.source.id, 'subscription:create', {
             channel,
             action,
-            filter,
         });
+    },
+
+    unsubscribe(channel, action) {
+        if (typeof channel !== 'string') {
+            // TODO: do we really want to throw?
+            throw BadArgumentsError(`${this.constructor.name}#unsubscribe expects a channel as a string for its first parameter`);
+        }
+
+        if (R.is(Function, action)) {
+            action = this._deregisterSubscriptionHandler(action);
+            if (action == null) {
+                // could not find the subscription
+                return;
+            }
+        }
+
+        return this.tell(this._outbox.source.id, 'subscription:remove', {
+            channel,
+            action,
+        });
+    },
+
+    _registerSubscriptionHandler(handler) {
+        if (this[handlerLookup$].has(handler)) {
+            const {action, references} = this[handlerLookup$].get(handler);
+            this[handlerLookup$].set(handler, {
+                action,
+                references: references + 1,
+            });
+
+            return action;
+        } else {
+            const action = uuidv4();
+            this[handlers$].set(action, handler);
+            this[handlerLookup$].set(handler, {
+                action,
+                references: 1,
+            });
+
+            return action;
+        }
+    },
+
+    _deregisterSubscriptionHandler(handler) {
+        if (this[handlerLookup$].has(handler)) {
+            const {action, references} = this[handlerLookup$].get(handler);
+            console.log('action', action, 'references', references);
+            if (references <= 1) {
+                this[handlerLookup$].delete(handler);
+                this[handlers$].delete(action);
+            } else {
+                this[handlerLookup$].set(handler, {
+                    action,
+                    references: references - 1,
+                });
+            }
+
+            return action;
+        }
+
+        return null;
     },
 
     configure(config) {
@@ -135,7 +217,7 @@ merge(Service.prototype, {
     },
 
     respondsTo(what) {
-        return this[actions$].has(what) && R.is(Function, this[what]);
+        return (this[actions$].has(what) && R.is(Function, this[what])) || this[handlers$].has(what);
     },
 });
 
@@ -154,6 +236,8 @@ Service.define = function(serviceName, def = {}) {
         let service = {
             get [Symbol.toStringTag]() { return serviceName; },
             [actions$]: actionSet,
+            [handlers$]: new Map(),
+            [handlerLookup$]: new Map(),
             __proto__: DefinedService.prototype,
         };
 

@@ -556,4 +556,308 @@ describe('Service', () => {
             expect(executed).toBe(false);
         });
     });
+
+    describe('#subscribe', () => {
+        it('accepts a function as the handler', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService')('sample');
+            sampleService._outbox = outbox;
+
+            const handler = () => {};
+            sampleService.subscribe('some:event', handler);
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(1);
+
+            const handlerId = outbox.calls.mostRecent().args[0].data.action;
+            expect(typeof handlerId).toBe('string');
+            expect(sampleService.respondsTo(handlerId)).toBe(true);
+            expect(outbox.calls.mostRecent().args).toEqual([{
+                destination: 'kernel',
+                data: {
+                    channel: 'some:event',
+                    action: handlerId,
+                },
+                source: sampleService.source,
+                action: 'subscription:create',
+            }, false]);
+        });
+
+        it('accepts a valid action name as the handler', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService', {
+                actions: {
+                    ['handle:event']() {
+
+                    },
+                },
+            })('sample');
+            sampleService._outbox = outbox;
+
+            sampleService.subscribe('some:event', 'handle:event');
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(1);
+            expect(outbox.calls.mostRecent().args).toEqual([{
+                destination: 'kernel',
+                data: {
+                    channel: 'some:event',
+                    action: 'handle:event',
+                },
+                source: sampleService.source,
+                action: 'subscription:create',
+            }, false]);
+        });
+
+        it('throws if the channel name is not a string', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService')('sample');
+            sampleService._outbox = outbox;
+
+            try {
+                sampleService.subscribe(1, 'handle:event');
+                expect(false).toBe(true);
+            } catch (e) {
+                expect(e.constructor.name).toBe('BadArgumentsError');
+                expect(e instanceof Error).toBe(true);
+            }
+        });
+
+        it('throws if the action is not a string or function', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService')('sample');
+            sampleService._outbox = outbox;
+
+            try {
+                sampleService.subscribe('some:channel', 1);
+                expect(false).toBe(true);
+            } catch (e) {
+                expect(e.constructor.name).toBe('BadArgumentsError');
+                expect(e instanceof Error).toBe(true);
+            }
+        });
+
+        it('throws if the action name is not valid', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService')('sample');
+            sampleService._outbox = outbox;
+
+            try {
+                sampleService.subscribe('some:channel', 'nonexistent:action');
+                expect(false).toBe(true);
+            } catch (e) {
+                expect(e.constructor.name).toBe('BadArgumentsError');
+                expect(e instanceof Error).toBe(true);
+            }
+        });
+    });
+
+    describe('#unsubscribe', () => {
+        it('accepts a function as the handler', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService')('sample');
+            sampleService._outbox = outbox;
+
+            const handler = () => {};
+            sampleService.subscribe('some:event', handler);
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(1);
+
+            const handlerId = outbox.calls.mostRecent().args[0].data.action;
+            expect(typeof handlerId).toBe('string');
+            expect(sampleService.respondsTo(handlerId)).toBe(true);
+            expect(outbox.calls.mostRecent().args).toEqual([{
+                destination: 'kernel',
+                data: {
+                    channel: 'some:event',
+                    action: handlerId,
+                },
+                source: sampleService.source,
+                action: 'subscription:create',
+            }, false]);
+
+            sampleService.unsubscribe('some:event', handler);
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(2);
+
+            expect(outbox.calls.mostRecent().args).toEqual([{
+                destination: 'kernel',
+                data: {
+                    channel: 'some:event',
+                    action: handlerId,
+                },
+                source: sampleService.source,
+                action: 'subscription:remove',
+            }, false]);
+
+            expect(sampleService.respondsTo(handlerId)).toBe(false);
+        });
+
+        it('accepts a valid action name as the handler', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService', {
+                actions: {
+                    ['handle:event']() {
+
+                    },
+                },
+            })('sample');
+            sampleService._outbox = outbox;
+
+            sampleService.subscribe('some:event', 'handle:event');
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(1);
+            expect(outbox.calls.mostRecent().args).toEqual([{
+                destination: 'kernel',
+                data: {
+                    channel: 'some:event',
+                    action: 'handle:event',
+                },
+                source: sampleService.source,
+                action: 'subscription:create',
+            }, false]);
+
+            sampleService.unsubscribe('some:event', 'handle:event');
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(2);
+            expect(outbox.calls.mostRecent().args).toEqual([{
+                destination: 'kernel',
+                data: {
+                    channel: 'some:event',
+                    action: 'handle:event',
+                },
+                source: sampleService.source,
+                action: 'subscription:remove',
+            }, false]);
+
+        });
+
+        it('throws if the channel name is not a string', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService')('sample');
+            sampleService._outbox = outbox;
+
+            try {
+                sampleService.unsubscribe(1, 'handle:event');
+                expect(false).toBe(true);
+            } catch (e) {
+                expect(e.constructor.name).toBe('BadArgumentsError');
+                expect(e instanceof Error).toBe(true);
+            }
+        });
+
+        it('does not delete the handler if the same function is used twice', () => {
+            const outbox = jasmine.createSpy('outbox').and.returnValue(Future((rej,res) => {
+                res(null);
+            }));
+
+            outbox.source = {
+                id: 'kernel',
+                name: 'kernel',
+                type: 'kernel',
+            };
+
+            const sampleService = Service.define('SampleService')('sample');
+            sampleService._outbox = outbox;
+
+            const handler = () => {};
+            sampleService.subscribe('some:event', handler);
+            sampleService.subscribe('some:other:event', handler);
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(2);
+
+            const handlerId = outbox.calls.mostRecent().args[0].data.action;
+            expect(typeof handlerId).toBe('string');
+            expect(sampleService.respondsTo(handlerId)).toBe(true);
+
+            sampleService.unsubscribe('some:event', handler);
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(3);
+            expect(sampleService.respondsTo(handlerId)).toBe(true);
+
+            sampleService.unsubscribe('some:other:event', handler);
+
+            expect(outbox).toHaveBeenCalled();
+            expect(outbox.calls.count()).toBe(4);
+            expect(sampleService.respondsTo(handlerId)).toBe(false);
+        });
+    });
 });

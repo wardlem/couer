@@ -18,7 +18,8 @@
     "obj-to-table": "^2.0.0",
     "ps-node": "^0.1.6",
     "ramda": "^0.24.1",
-    "uuidv4": "^0.5.0"
+    "uuidv4": "^0.5.0",
+    "navel-pattern": "*"
   },
   "devDependencies": {
     "jasmine": "^2.8.0",

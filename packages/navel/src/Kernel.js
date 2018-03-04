@@ -5,12 +5,15 @@ const debug = require('debug')('navel:Kernel');
 const ServiceNameConflictError = require('./errors/ServiceNameConflictError');
 const ServiceNotFoundError = require('./errors/ServiceNotFoundError');
 const AccessDeniedError = require('./errors/AccessDeniedError');
+const BadArgumentsError = require('./errors/BadArgumentsError');
 
 const Service = require('./Service');
 
 const wrapFuture = require('./utils/wrapFuture');
 const loadConfig = require('./utils/loadConfig');
 const resolvePath = require('./utils/resolvePath');
+
+const {PatternTree} = require('navel-pattern');
 
 const noop = () => {};
 
@@ -133,11 +136,46 @@ const Kernel = Service.define('Kernel', {
         ['service:describeall']() {
             return this.seek('describe');
         },
-        ['subscription:create']() {
+        ['subscription:create']({pattern, action}, source) {
+            if (typeof pattern !== 'string' || typeof action !== 'string') {
+                return BadArgumentsError('A string pattern and a string action are required to create a subscription');
+            }
 
+            const reference = `${source.id}%%${action}%%${pattern}`;
+            const subscription = {
+                reference,
+                pattern,
+                action,
+                source,
+            };
+
+            this.subscriptions.set(reference, subscription);
+            this.events = this.events.with(pattern, reference);
         },
-        ['subscription:destroy']() {
+        ['subscription:remove']({pattern, action}, source) {
+            if (typeof pattern !== 'string' || typeof action !== 'string') {
+                return BadArgumentsError('A string pattern and a string action are required to remove a subscription');
+            }
 
+            const reference = `${source.id}%%${action}%%${pattern}`;
+            if (this.subscriptions.has(reference)) {
+                this.subscriptions.delete(reference);
+
+                this.events = this.events.without(pattern, reference);
+            }
+
+            return 'ok';
+        },
+        ['subscription:removeall'](_data, source) {
+            const search = `${source.id}%%`;
+            const references = Array.from(this.subscriptions.keys()).filter((key) => {
+                return key.startsWith(search);
+            });
+
+            references.forEach((ref) => {
+                this.events = this.events.without(this.subscriptions.get(ref).pattern, ref);
+                this.subscriptions.delete(ref);
+            });
         },
     },
 
@@ -145,7 +183,8 @@ const Kernel = Service.define('Kernel', {
         this.services = new Map();
         this.serviceNames = new Map();
         this.subscriptions = new Map();
-        this.configPath = null,
+        this.events = PatternTree.Trunk();
+        this.configPath = null;
         this['service:register']({service: this}, this.source);
 
         process.title = `${this.name}`;
@@ -212,16 +251,25 @@ const Kernel = Service.define('Kernel', {
             }
         },
         sendBroadcast(channel, data, source) {
-            if (!this.subscriptions.has(channel)) {
-                return Future.of(null);
-            }
-
-            const subscriptions = Array.from(this.subscriptions.get(channel).values()).filter((sub) => {
-                return sub.filter(data);
+            const references = this.events.search(channel);
+            const subscriptions = references.map((subscription) => {
+                return this.subscriptions.get(subscription);
             });
 
-            const futures = subscriptions.map((sub) => {
-                return wrapFuture(sub.action(data, source));
+            const futures = subscriptions.map((subscription) => {
+                // We need to make sure that one failure does
+                // not stop all others from running so we chain the rejected
+                // branch to simply resolve with the error.
+                // TODO: consider reporting any errors somehow
+
+                return this.findService(subscription.source.id)
+                    .chain((service) => wrapFuture(service._inbox({
+                        source,
+                        action: subscription.action,
+                        data,
+                    })))
+                    .chainRej((err) => Future.of(err))
+                ;
             });
 
             // We don't return the broadcast future since we don't want to bubble
@@ -242,7 +290,7 @@ const Kernel = Service.define('Kernel', {
                     // its destination, forcing the future to execute
 
                     // TODO: watchers and interceptors
-                    let sendFuture = wrapFuture(service._inbox({
+                    const sendFuture = wrapFuture(service._inbox({
                         source,
                         action,
                         data,
@@ -267,13 +315,26 @@ const Kernel = Service.define('Kernel', {
                     // its destination, forcing the future to execute
 
                     // TODO: watchers and interceptors
-                    const futures =  services.map((service) => wrapFuture(service._inbox({
-                        source,
-                        action,
-                        data,
-                    })));
+                    const futures =  services.map(
+                        (service) => wrapFuture(service._inbox({
+                            source,
+                            action,
+                            data,
+                        }))
+                        // here we are resolving with null in case of an error so
+                        // that the rest of the discovery can complete succesfully.
+                        // we filter the null values out after everything is reported.
+                        // TODO: report the error
+                        .chainRej((err) => Future.of(null))
+                    );
 
-                    const sendFuture = Future.parallel(10, futures);
+                    // TODO: make number of simultaneous message sends configurable
+                    //       at the kernel layer
+                    const sendFuture = Future.parallel(10, futures).map((results) => {
+                        // remove null values here...
+                        // TODO: should also filter non-valid results and report problems
+                        return results.filter((result) => !!result);
+                    });
 
                     if (expectResponse) {
                         return sendFuture;
