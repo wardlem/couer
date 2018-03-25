@@ -1,0 +1,22 @@
+{
+  "name": "navel-config",
+  "version": "1.0.0",
+  "description": "Configuration module for navel",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/jasmine",
+    "coverage": "./node_modules/.bin/nyc npm test"
+  },
+  "author": "Mark Wardle <mwwardle@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "fluture": "^8.0.2",
+    "merge-descriptors": "^1.0.1",
+    "ramda": "^0.25.0",
+    "js-yaml": "^3.10.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.1.0",
+    "jasmine-spec-reporter": "^4.2.1"
+  }
+}

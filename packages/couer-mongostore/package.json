@@ -1,5 +1,5 @@
 {
-  "name": "couer-mongostorage",
+  "name": "couer-mongostore",
   "version": "1.0.0",
   "description": "Mongo storage engine for couer",
   "main": "index.js",
@@ -13,6 +13,6 @@
     "fluture": "^8.0.1",
     "mongodb": "^3.0.1",
     "ramda": "^0.25.0",
-    "couer-storage": "*"
+    "couer-store": "*"
   }
 }

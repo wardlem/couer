@@ -1,16 +1,16 @@
 const {ObjectID, MongoClient} = require('mongodb');
 const Future = require('fluture');
 const {pick} = require('ramda');
-const debug = require('debug')('couer:MongoStorage');
+const debug = require('debug')('couer:MongoStore');
 
 // const objectid = require('./objectid');
 
-const Storage = require('couer-storage');
+const Store = require('couer-store');
 
 const findOpts = ['hint', 'limit', 'maxTimeMS', 'skip', 'sort'];
 const pickFindOneOpts = pick(findOpts);
 
-const MongoStorage = Storage.define('MongoStorage', {
+const MongoStore = Store.define('MongoStore', {
     init() {
         this.connection = null;
         this.uri = '';
@@ -131,6 +131,6 @@ const MongoStorage = Storage.define('MongoStorage', {
     },
 });
 
-MongoStorage.ObjectId = ObjectID;
+MongoStore.ObjectId = ObjectID;
 
-module.exports = MongoStorage;
+module.exports = MongoStore;

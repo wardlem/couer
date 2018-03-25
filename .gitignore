@@ -1,1 +1,3 @@
 lerna-debug.log
+/**/coverage/
+node_modules

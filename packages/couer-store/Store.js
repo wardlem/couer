@@ -1,12 +1,12 @@
 const {Service} = require('navel');
 
-const Storage = function() {};
+const Store = function() {};
 
 // This currently doesn't do a whole lot,
 // but it may do more in the future
-Storage.define = function(serviceName, def = {}) {
+Store.define = function(serviceName, def = {}) {
     const {
-        type = 'storage',
+        type = 'store',
         actions = {},
         proto = {},
         init = null,
@@ -21,4 +21,4 @@ Storage.define = function(serviceName, def = {}) {
     });
 };
 
-module.exports = Storage;
+module.exports = Store;

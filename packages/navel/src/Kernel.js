@@ -10,7 +10,6 @@ const BadArgumentsError = require('./errors/BadArgumentsError');
 const Service = require('./Service');
 
 const wrapFuture = require('./utils/wrapFuture');
-const loadConfig = require('./utils/loadConfig');
 const resolvePath = require('./utils/resolvePath');
 
 const {PatternTree} = require('navel-pattern');
@@ -321,11 +320,11 @@ const Kernel = Service.define('Kernel', {
                             action,
                             data,
                         }))
-                        // here we are resolving with null in case of an error so
-                        // that the rest of the discovery can complete succesfully.
-                        // we filter the null values out after everything is reported.
-                        // TODO: report the error
-                        .chainRej((err) => Future.of(null))
+                            // here we are resolving with null in case of an error so
+                            // that the rest of the discovery can complete succesfully.
+                            // we filter the null values out after everything is reported.
+                            // TODO: report the error
+                            .chainRej((err) => Future.of(null))
                     );
 
                     // TODO: make number of simultaneous message sends configurable
@@ -347,11 +346,9 @@ const Kernel = Service.define('Kernel', {
         },
 
         // Build services from a configuration file.
-        // Currently, only yaml is supported, but other file types may be added in the
-        // future (json, toml, js).
-        boot(configPath) {
-            debug('booting', configPath);
-            return loadConfig(configPath)
+        boot(config) {
+            debug('booting');
+            return Future.of(config)
                 .chain((config) => {
                     const serviceDefs = config.services;
 
@@ -391,6 +388,7 @@ const Kernel = Service.define('Kernel', {
         },
 
         halt() {
+            debug('received command to halt kernel');
             return this['service:stopall']({}, this.source);
         },
     },

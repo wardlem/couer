@@ -32,7 +32,7 @@ function createModel(model, registry, name, propDefs, options = {}) {
         timestamps = true,
         softdelete = false,
         init = R.identity,
-        storageName = model.storageName,
+        storeName = model.storeName,
         collectionName = calculateCollectionName(name),
         indexes = {},
         methods = {},
@@ -103,8 +103,8 @@ function createModel(model, registry, name, propDefs, options = {}) {
     Model.pk = pk;
     Model.collectionName = collectionName;
     Model.indexes = indexes;
-    Model.storageName = storageName;
-    Model.repo = Repo(storageName, collectionName);
+    Model.storeName = storeName;
+    Model.repo = Repo(storeName, collectionName);
     Model._associations = associations;
     Model._storedProperties = storedProperties;
 
@@ -487,7 +487,7 @@ function extend(old, extension) {
         props = {},
         allowDuplicateNames,
         calculateCollectionName,
-        storageName = old.storageName,
+        storeName = old.storeName,
         pk = old.pk,
         pkProp = old.pkProp,
     } = extension;
@@ -518,7 +518,7 @@ function extend(old, extension) {
     model.allowDuplicateNames = R.is(Boolean, allowDuplicateNames) ? allowDuplicateNames : old.allowDuplicateNames;
     model.create = R.partial(createModel, [model, registry]);
     model.calculateCollectionName = R.is(Function, calculateCollectionName) ? calculateCollectionName : old.calculateCollectionName;
-    model.storageName = storageName;
+    model.storeName = storeName;
     model.pk = pk;
     model.pkProp = pkProp;
 
@@ -527,7 +527,7 @@ function extend(old, extension) {
 
 const defaults = {
     props,
-    storageName: 'storage',
+    storeName: 'storage',
     allowDuplicateNames: false,
     pk: '_id',
     pkProp: 'any',
