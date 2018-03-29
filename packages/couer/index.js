@@ -1,14 +1,16 @@
 module.exports = {
-    Kernel: require('navel').Kernel,
-    Service: require('navel').Service,
-    Future: require('fluture'),
     EventEmitter: require('couer-eventemitter'),
+    Store: require('couer-store'),
 };
 
 [
-    'couer-server',
+    'navel',
+    'couer-httpserver',
     'couer-auth',
     'couer-odm',
+    'couer-ui',
+    'couer-util',
+    'couer-restapi',
 ].forEach((package) => {
     Object.assign(module.exports, require(package));
 });

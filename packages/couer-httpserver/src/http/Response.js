@@ -8,7 +8,7 @@ const Future = require('fluture');
 
 const debug = require('debug')('couer:Response');
 
-const setCharset = require('../utils/setCharset');
+const setCharset = require('../util/setCharset');
 const createHttpError = require('../errors/createHttpError');
 
 const send = require('send');

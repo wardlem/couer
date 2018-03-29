@@ -1,5 +1,5 @@
 const NavelError = require('./NavelError');
 
-const ServiceNotFoundError = NavelError.define('ServiceNameConflictError', ['message', 'id']);
+const ServiceNotFoundError = NavelError.define('ServiceNotFound', ['message', 'id']);
 
 module.exports = ServiceNotFoundError;

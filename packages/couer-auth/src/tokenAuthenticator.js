@@ -1,4 +1,4 @@
-const Pipeline = require('../server/router/Pipeline');
+const {Pipeline} = require('couer-httpserver');
 const createHttpError = require('http-errors');
 const Future = require('fluture');
 const debug = require('debug')('couer:auth:tokenAuthenticator');

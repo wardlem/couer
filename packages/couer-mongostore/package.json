@@ -9,10 +9,11 @@
   "author": "Mark Wardle <mwardle@robinsage.com>",
   "license": "ISC",
   "dependencies": {
+    "bytes": "^3.0.0",
+    "couer-store": "*",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",
-    "mongodb": "^3.0.1",
-    "ramda": "^0.25.0",
-    "couer-store": "*"
+    "mongodb": "^3.0.5",
+    "ramda": "^0.25.0"
   }
 }

@@ -8,5 +8,5 @@ module.exports = {
     'float': require('./float'),
     object: require('./object'),
     string: require('./string'),
-    objectid: require('./objectid'),
+    // objectid: require('./objectid'),
 };

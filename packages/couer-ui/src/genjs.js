@@ -1,6 +1,6 @@
 // const generate = require('escodegen').generate;
 // const lave = require('lave');
-const uneval = require('../util/uneval');
+const {uneval} = require('couer-util');
 module.exports = function generateUserInterfaceJavascript(data) {
     // const appData = {
     //     views: data.views,

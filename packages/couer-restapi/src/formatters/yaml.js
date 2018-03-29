@@ -1,4 +1,4 @@
-const {Pipeline} = require('../../server');
+const {Pipeline} = require('couer-httpserver');
 const {done} = Pipeline;
 
 const yaml = require('js-yaml');

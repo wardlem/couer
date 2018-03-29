@@ -5,7 +5,7 @@ const typeis = require('type-is');
 const cookieparser = require('cookie').parse;
 const unsign = require('cookie-signature').unsign;
 const mergeDescriptors = require('merge-descriptors');
-const stripQueryString = require('../utils/stripQueryString');
+const stripQueryString = require('../util/stripQueryString');
 
 const debug = require('debug')('couer:Request');
 

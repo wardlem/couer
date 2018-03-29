@@ -9,6 +9,7 @@
   "author": "Mark Wardle <mwardle@robinsage.com>",
   "license": "ISC",
   "dependencies": {
+    "bytes": "^3.0.0",
     "fluture": "^8.0.1",
     "ramda": "^0.25.0"
   }

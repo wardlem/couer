@@ -2,7 +2,7 @@ const merge = require('merge-descriptors');
 const pluralize = require('pluralize');
 const ListUI = require('./listui');
 const debug = require('debug')('couer:ui:modelui');
-const bindClosure = require('../util/bindClosure');
+const {bindClosure} = require('couer-util');
 
 function ModelUI(options) {
     const Model = options.model;

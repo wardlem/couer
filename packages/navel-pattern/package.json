@@ -27,6 +27,8 @@
     ]
   },
   "dependencies": {
-    "merge-descriptors": "^1.0.1"
+    "bytes": "^3.0.0",
+    "merge-descriptors": "^1.0.1",
+    "ramda": "^0.25.0"
   }
 }

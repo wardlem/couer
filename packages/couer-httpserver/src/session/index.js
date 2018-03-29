@@ -64,5 +64,7 @@ const session = function session(options = {}) {
 
 session.parseCookies = require('./parseCookies');
 session.MemoryStore = require('./MemoryStore');
+session.ModelStore = require('./ModelStore');
+
 
 module.exports = session;

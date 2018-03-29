@@ -222,6 +222,7 @@ const Kernel = Service.define('Kernel', {
             );
         },
         processMessage(message, expectResponse = false) {
+            debug('processing message', message);
             const {
                 source,
                 destination = null,
@@ -250,6 +251,7 @@ const Kernel = Service.define('Kernel', {
             }
         },
         sendBroadcast(channel, data, source) {
+            debug('send broadcast', channel);
             const references = this.events.search(channel);
             const subscriptions = references.map((subscription) => {
                 return this.subscriptions.get(subscription);
@@ -280,6 +282,8 @@ const Kernel = Service.define('Kernel', {
             return Future.of(null);
         },
         sendPointToPoint(destination, action, data, source, expectResponse) {
+            debug('send p2p', destination, action);
+
             return this.findService(destination)
                 .chain((service) => {
 
@@ -305,8 +309,12 @@ const Kernel = Service.define('Kernel', {
             ;
         },
         sendDiscovery(action, data, source, expectResponse) {
+            debug('send discovery', action);
+
             return this.respondingServices(action)
                 .chain((services) => {
+
+                    debug('found services', services.map((s) => `${s.type}/${s.name}/${s.id}`));
 
                     // If a response is expected, we just send the message
                     // and wait for the future to resolve with the data.
@@ -324,7 +332,10 @@ const Kernel = Service.define('Kernel', {
                             // that the rest of the discovery can complete succesfully.
                             // we filter the null values out after everything is reported.
                             // TODO: report the error
-                            .chainRej((err) => Future.of(null))
+                            .chainRej((err) => {
+                                debug('discover resulted in an error', err);
+                                return Future.of(null);
+                            })
                     );
 
                     // TODO: make number of simultaneous message sends configurable

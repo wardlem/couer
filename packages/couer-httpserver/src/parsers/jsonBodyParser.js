@@ -6,7 +6,7 @@ const debug = require('debug')('core:jsonBodyParser');
 const Pipeline = require('../router/Pipeline');
 
 const readBody = require('./readBody');
-const createHttpError = require('../error/createHttpError');
+const createHttpError = require('../errors/createHttpError');
 
 module.exports = function jsonBodyParser(options = {}) {
     const opts = R.merge({

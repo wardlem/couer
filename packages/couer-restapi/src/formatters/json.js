@@ -1,4 +1,4 @@
-const {Pipeline} = require('../../server');
+const {Pipeline} = require('couer-httpserver');
 const {done} = Pipeline;
 
 module.exports = function createJsonFormatter(options = {}) {

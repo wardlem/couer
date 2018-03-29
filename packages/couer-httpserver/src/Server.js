@@ -16,6 +16,7 @@ const {done} = require('./router/Pipeline');
 const CouerHttpServer = Service.define('CouerHttpServer', {
     type: 'server',
     init() {
+        debug('initializing couer http server');
         this.pipeline = null;
         this.port = 4000;
         this.httpserver = null;

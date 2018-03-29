@@ -1,12 +1,12 @@
 const merge = require('merge-descriptors');
 
-function NotFoundUI(options) {
+function DashboardUI(options) {
     return {
-        __proto__: NotFoundUI.prototype,
+        __proto__: DashboardUI.prototype,
     };
 }
 
-merge(NotFoundUI.prototype, {
+merge(DashboardUI.prototype, {
     definition(config) {
         return [
             {type: 'dashboard', path: '/'},
@@ -14,4 +14,4 @@ merge(NotFoundUI.prototype, {
     },
 });
 
-module.exports = NotFoundUI;
+module.exports = DashboardUI;

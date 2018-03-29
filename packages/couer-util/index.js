@@ -4,4 +4,5 @@ module.exports = {
     keygenerator: require('./src/keygenerator'),
     resolvePath: require('./src/resolvePath'),
     uneval: require('./src/uneval'),
+    trimTrailingSlash: require('./src/trimTrailingSlash'),
 };

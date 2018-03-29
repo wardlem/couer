@@ -5,33 +5,28 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/nyc --reporter=html --reporter=text mocha test/**/*",
-    "coverage": "npm test && see coverage/index.html",
-    "build": "./node_modules/.bin/browserify ./client/src/admin.js -o ./client/dist/admin.js",
-    "watch": "./node_modules/.bin/watchify ./client/src/admin.js -o './node_modules/.bin/exorcist ./client/dist/admin.js.map > ./client/dist/admin.js' -d"
+    "coverage": "npm test && see coverage/index.html"
   },
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bytes": "^3.0.0",
     "couer-auth": "*",
     "couer-eventemitter": "*",
+    "couer-httpserver": "*",
     "couer-odm": "*",
     "couer-restapi": "*",
-    "couer-server": "*",
     "couer-store": "*",
     "couer-ui": "*",
     "couer-util": "*",
-    "navel": "*"
+    "navel": "*",
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
-    "browserify": "^14.4.0",
     "eslint": "^4.3.0",
-    "exorcist": "^0.4.0",
     "expect": "^1.20.2",
-    "mithril": "^1.1.3",
     "mocha": "^3.4.2",
-    "nyc": "^11.0.3",
-    "redux": "^3.7.2",
-    "watchify": "^3.9.0"
+    "nyc": "^11.0.3"
   },
   "nyc": {
     "include": [

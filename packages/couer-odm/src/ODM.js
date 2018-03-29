@@ -11,7 +11,7 @@ const ODM = Service.define('ODM', {
         this.models = [];
     },
     actions: {
-        configure({modeldir}) {
+        configure({modeldir, defaultstore}) {
             this.modeldir = modeldir ||  path.resolve(process.cwd(), './models');
         },
         start() {
@@ -45,7 +45,9 @@ const ODM = Service.define('ODM', {
             return Future.node((done) => fs.readdir(modeldir, done))
                 .map((files) => {
                     debug('files: ', files);
-                    return files.filter((file) => /.js$/.test(file));
+                    const filtered = files.filter((file) => /^[A-Z].*\.js$/.test(file));
+                    debug('filtered: ', filtered);
+                    return filtered;
                 })
                 .map(R.map((file) => path.resolve(modeldir, file)))
                 .map(R.map(require))

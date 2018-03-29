@@ -1,8 +1,8 @@
 const debug = require('debug')('core:ui');
 const pathlib = require('path');
-const trimTrailingSlash = require('../server/utils/trimTrailingSlash');
+const {trimTrailingSlash} = require('couer-util');
 
-const {router, Pipeline} = require('../server');
+const {router, Pipeline} = require('couer-httpserver');
 const {done, next} = Pipeline;
 
 const R = require('ramda');
@@ -93,8 +93,8 @@ module.exports = exports = function createUI(options, definitions) {
                 return done(req, res.header('Content-Type', 'text/css').send(css));
             }),
         ]),
-        router.static('/_skin', pathlib.resolve(__dirname, '../../skin/dist')),
-        router.static('/_resource', pathlib.resolve(__dirname, './client/src')),
+        router.static('/_skin', pathlib.resolve(__dirname, '../../../../skin/dist')),
+        router.static('/_resource', pathlib.resolve(__dirname, '../client/src')),
         (req, res) => {
             // no post routes here
             if (!req.ismethod('GET')) {

@@ -1,8 +1,8 @@
 const debug = require('debug')('core:api');
 const {STATUS_CODES} = require('http');
 
-const {router, Pipeline} = require('couer-server');
-const trimTrailingSlash = require('couer-server/utils/trimTrailingSlash');
+const {router, Pipeline} = require('couer-httpserver');
+const {trimTrailingSlash} = require('couer-util');
 
 const {next, done} = Pipeline;
 

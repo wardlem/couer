@@ -9,11 +9,16 @@
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bytes": "^3.0.0",
+    "couer-httpserver": "*",
     "couer-odm": "*",
-    "couer-server": "*",
+    "couer-util": "*",
+    "data2xml": "^1.2.5",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",
+    "js-yaml": "^3.11.0",
     "merge-descriptors": "^1.0.1",
+    "qs": "^6.5.1",
     "ramda": "^0.25.0"
   }
 }

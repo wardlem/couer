@@ -1,11 +1,11 @@
 const R = require('ramda');
 const Future = require('fluture');
 const mergeDescriptors = require('merge-descriptors');
-const createHttpError = require('couer-server/src/errors/createHttpError');
+const createHttpError = require('couer-httpserver/src/errors/createHttpError');
 const ValidationError = require('couer-odm/src/errors/ValidationError');
 const debug = require('debug')('couer:modelapi');
 
-const {router, Pipeline} = require('../server');
+const {router, Pipeline} = require('couer-httpserver');
 
 const stringifySort = require('./util/stringifySort');
 const processQuery = require('./util/processQuery');

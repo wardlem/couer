@@ -3,7 +3,7 @@ const Future = require('fluture');
 
 const Pipeline = require('./Pipeline');
 const matchPattern = require('../util/matchPath');
-const trimTrailingSlash = require('../utilstrimTrailingSlash');
+const trimTrailingSlash = require('../util/trimTrailingSlash');
 
 const methods = module.exports = function methods(methods, route, action) {
     if (route !== '/' && R.last(route) === '/') {

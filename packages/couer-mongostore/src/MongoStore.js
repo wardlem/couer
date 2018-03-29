@@ -74,7 +74,7 @@ const MongoStore = Store.define('MongoStore', {
         },
         updateOne({collection, filter, update, options = {}}) {
             return this.collection(collection)
-                .chain(collection => Future.node(done => collection.updateOne(filter, update, options, done)));
+                .chain(collection => Future.node(done => collection.updateOne(filter, {$set: update}, options, done)));
         },
     },
     proto: {
@@ -86,9 +86,11 @@ const MongoStore = Store.define('MongoStore', {
                     const {uri, options = null} = this;
                     MongoClient.connect(uri, options, (err, connection) => {
                         if (err) {
+                            debug('failed to connect to mongo');
                             return reject(err);
                         }
 
+                        debug('connection established with', this.uri);
                         this.connection = connection;
                         resolve(connection);
                     });
@@ -108,7 +110,7 @@ const MongoStore = Store.define('MongoStore', {
             }
         },
         collection(collectionName) {
-            return this.getConnection().map(c => c.collection(collectionName));
+            return this.getConnection().map(c => c.db().collection(collectionName));
         },
         cursor(collectionName, filter, options) {
             return this.collection(collectionName)

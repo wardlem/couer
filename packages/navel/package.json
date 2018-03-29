@@ -10,16 +10,17 @@
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bytes": "^3.0.0",
     "debug": "^3.1.0",
     "exeunt": "^1.1.1",
     "fluture": "^7.1.2",
     "js-yaml": "^3.10.0",
     "merge-descriptors": "^1.0.1",
+    "navel-pattern": "*",
     "obj-to-table": "^2.0.0",
     "ps-node": "^0.1.6",
-    "ramda": "^0.24.1",
-    "uuidv4": "^0.5.0",
-    "navel-pattern": "*"
+    "ramda": "^0.25.0",
+    "uuidv4": "^0.5.0"
   },
   "devDependencies": {
     "jasmine": "^2.8.0",
