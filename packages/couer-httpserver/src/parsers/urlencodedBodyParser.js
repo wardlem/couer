@@ -3,7 +3,7 @@ const bytes = require('bytes');
 const Future = require('fluture');
 const R = require('ramda');
 const debug = require('debug')('core:urlencodedBodyParser');
-const Pipeline = require('../router/Pipeline');
+const {Pipeline} = require('couer-router');
 
 const readBody = require('./readBody');
 const createHttpError = require('../errors/createHttpError');

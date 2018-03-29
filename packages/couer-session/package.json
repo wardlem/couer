@@ -1,7 +1,7 @@
 {
-  "name": "couer-auth",
+  "name": "couer-session",
   "version": "1.0.0",
-  "description": "Authorization library for couer",
+  "description": "Session handling middleware for Couer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,12 +9,11 @@
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "bytes": "^3.0.0",
-    "couer-router": "*",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",
-    "http-errors": "^1.6.2",
     "merge-descriptors": "^1.0.1",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "uid-safe": "^2.1.5",
+    "couer-router": "*"
   }
 }

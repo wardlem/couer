@@ -10,8 +10,7 @@ const BusBoy = require('busboy');
 const appendField = require('append-field');
 const _mkdirp = require('mkdirp');
 
-const Pipeline = require('../router/Pipeline');
-const Continuation = require('../router/Continuation');
+const {Pipeline, Continuation} = require('couer-router');
 const createHttpError = require('../errors/createHttpError');
 
 module.exports = function multipartBodyParser(options = {}) {

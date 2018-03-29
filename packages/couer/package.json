@@ -16,6 +16,8 @@
     "couer-httpserver": "*",
     "couer-odm": "*",
     "couer-restapi": "*",
+    "couer-router": "*",
+    "couer-session": "*",
     "couer-store": "*",
     "couer-ui": "*",
     "couer-util": "*",

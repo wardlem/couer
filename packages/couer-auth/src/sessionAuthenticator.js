@@ -1,4 +1,4 @@
-const {Pipeline} = require('couer-httpserver');
+const {Pipeline} = require('couer-router');
 const createHttpError = require('http-errors');
 const Future = require('fluture');
 const debug = require('debug')('couer:auth:sessionAuthenticator');

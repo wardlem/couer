@@ -1,8 +1,7 @@
 const R = require('ramda');
 const Future = require('fluture');
-const Pipeline = require('../router/Pipeline');
+const {Pipeline} = require('couer-router');
 const uid = require('uid-safe').sync;
-const MemoryStore = require('./MemoryStore');
 const debug = require('debug')('core:session');
 
 const generateSid = () => uid(24);
@@ -11,7 +10,7 @@ const session = function session(options = {}) {
     const {
         cookie = {},
         key = 'core.sid',
-        store = MemoryStore,
+        store = session.MemoryStore,
         genId = generateSid,
     } = options;
     return function sessionMiddleware(req, res) {

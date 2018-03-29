@@ -2,9 +2,7 @@ const R = require('ramda');
 const Future = require('fluture');
 
 const Pipeline = require('./Pipeline');
-const matchPattern = require('../util/matchPath');
-const stringifyPath = require('../util/stringifyPath');
-const trimTrailingSlash = require('../util/trimTrailingSlash');
+const {matchPath, stringifyPath, trimTrailingSlash} = require('couer-util');
 
 module.exports = (route, pipeline) => {
     if (Array.isArray(pipeline)) {
@@ -12,7 +10,7 @@ module.exports = (route, pipeline) => {
     }
     route = trimTrailingSlash(route);
     return (req, res) => {
-        const match = matchPattern(route, req.resource, true);
+        const match = matchPath(route, req.resource, true);
 
         if (R.isNil(match)) {
             return Pipeline.next(req, res);

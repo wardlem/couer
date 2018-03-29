@@ -3,7 +3,7 @@ const Task = require('fluture');
 const R = require('ramda');
 const debug = require('debug')('core:jsonBodyParser');
 
-const Pipeline = require('../router/Pipeline');
+const {Pipeline} = require('couer-router');
 
 const readBody = require('./readBody');
 const createHttpError = require('../errors/createHttpError');

@@ -1,10 +1,9 @@
-const Request = require('../http/Request');
-const Pipeline = require('../router/Pipeline');
+const {Pipeline} = require('couer-router');
 
 module.exports = function(options = {}) {
     return function parseCookies(req, res) {
         return Pipeline.next(
-            Request.parseCookies(options, req),
+            req.parseCookies(options, req),
             res
         );
     };

@@ -11,7 +11,7 @@ const createHttpError = require('http-errors');
 const {HttpError} = createHttpError;
 
 const {Request, Response} = require('./http');
-const {done} = require('./router/Pipeline');
+const {done} = require('couer-router').Pipeline;
 
 const CouerHttpServer = Service.define('CouerHttpServer', {
     type: 'server',

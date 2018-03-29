@@ -11,6 +11,8 @@
   "dependencies": {
     "bytes": "^3.0.0",
     "ramda": "^0.25.0",
-    "navel": "*"
+    "navel": "*",
+    "url-pattern": "^1.0.3",
+    "content-type": "^1.0.4"
   }
 }

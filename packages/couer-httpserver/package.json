@@ -16,6 +16,8 @@
     "content-type": "^1.0.4",
     "cookie": "^0.3.1",
     "cookie-signature": "^1.1.0",
+    "couer-router": "*",
+    "couer-util": "*",
     "debug": "^3.1.0",
     "encodeurl": "^1.0.1",
     "fluture": "^8.0.2",
@@ -30,8 +32,6 @@
     "raw-body": "^2.3.2",
     "send": "^0.16.2",
     "type-is": "^1.6.15",
-    "uid-safe": "^2.1.5",
-    "url-pattern": "^1.0.3",
     "zlib": "^1.0.5"
   }
 }

@@ -1,5 +1,5 @@
 const Future = require('fluture');
-const Pipeline = require('couer-httpserver/src/router/Pipeline');
+const {Pipeline} = require('couer-router');
 const debug = require('debug')('core:auth');
 
 const Authorization = require('./Authorization');

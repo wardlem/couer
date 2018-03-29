@@ -1,7 +1,7 @@
 {
-  "name": "couer-auth",
+  "name": "couer-router",
   "version": "1.0.0",
-  "description": "Authorization library for couer",
+  "description": "Routing for Couer",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,12 +9,12 @@
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "bytes": "^3.0.0",
-    "couer-router": "*",
+    "couer-util": "*",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",
     "http-errors": "^1.6.2",
     "merge-descriptors": "^1.0.1",
-    "ramda": "^0.25.0"
+    "ramda": "^0.25.0",
+    "mime": "^2.2.0"
   }
 }

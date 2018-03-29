@@ -2,7 +2,7 @@ const url = require('url');
 const R = require('ramda');
 const qs = require('qs');
 
-const Pipeline = require('../router/Pipeline');
+const {Pipeline} = require('couer-router');
 
 module.exports = function queryParser(options = {}) {
     let opts = R.merge({

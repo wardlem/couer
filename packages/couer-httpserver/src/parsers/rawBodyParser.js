@@ -3,7 +3,7 @@ const Future = require('fluture');
 const R = require('ramda');
 const debug = require('debug')('core:rawBodyParser');
 
-const Pipeline = require('../router/Pipeline');
+const {Pipeline} = require('couer-router');
 const readBody = require('./readBody');
 
 module.exports = function rawBodyParser(options = {}) {
