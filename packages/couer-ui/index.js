@@ -4,7 +4,7 @@ module.exports = {
     listui: require('./src/listui'),
     modelui: require('./src/modelui'),
     notfoundui: require('./src/notfoundui'),
-    dashboardui: require('./src/notfoundui'),
+    dashboardui: require('./src/dashboardui'),
     sessionui: require('./src/sessionui'),
     // todo: more
 };

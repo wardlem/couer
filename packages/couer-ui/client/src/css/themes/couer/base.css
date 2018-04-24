@@ -1,0 +1,44 @@
+/* @value html-font-size, html-line-height, body-bg, body-font-color, body-font-family, font-size, link-color, link-color-dark from './variables.css'; */
+
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: html-font-size;
+  line-height: html-line-height;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: body-bg;
+  color: body-font-color;
+  font-family: body-font-family;
+  font-size: font-size;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+/* todo: consider moving this to a component file */
+a {
+  color: link-color;
+  outline: none;
+  text-decoration: none;
+
+  &:focus {
+    box-shadow: shadow-control;
+    /* @include control-shadow(); */
+  }
+
+  &:focus,
+  &:hover,
+  &:active,
+  &.active {
+    color: link-color-dark;
+    text-decoration: underline;
+  }
+}

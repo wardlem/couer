@@ -1,0 +1,128 @@
+@value color-white, color-white-darkened, color-white-extra-darkened, color-blue, color-blue-darkened from '!theme';
+
+@value border-style-input: solid;
+@value height-input: 3.16em;
+@value padding-input: 6px 10px;
+@value border-input: 1px border-style-input color-white-darkened;
+@value border-input-focused: 1px border-style-input color-blue;
+@value border-input-hovered: 1px border-style-input color-white-extra-darkened;
+@value color-input: color-blue-darkened;
+
+
+input[type="email"].input,
+input[type="number"].input,
+input[type="search"].input,
+input[type="text"].input,
+input[type="tel"].input,
+input[type="url"].input,
+input[type="password"].input,
+textarea.input,
+select.input {
+    height: height-input;
+    padding: padding-input;
+    background-color: color-white;
+    border: border-input;
+    box-shadow: none;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+}
+
+input[type="email"].input,
+input[type="number"].input,
+input[type="search"].input,
+input[type="text"].input,
+input[type="tel"].input,
+input[type="url"].input,
+input[type="password"].input,
+textarea.input {
+    appearance: none;
+}
+
+input[type="email"].input:hover,
+input[type="number"].input:hover,
+input[type="search"].input:hover,
+input[type="text"].input:hover,
+input[type="tel"].input:hover,
+input[type="url"].input:hover,
+input[type="password"].input:hover,
+textarea.input:hover,
+select.input:hover {
+    border: border-input-hovered;
+    outline: 0;
+}
+
+input[type="email"].input:focus,
+input[type="number"].input:focus,
+input[type="search"].input:focus,
+input[type="text"].input:focus,
+input[type="tel"].input:focus,
+input[type="url"].input:focus,
+input[type="password"].input:focus,
+textarea.input:focus,
+select.input:focus {
+    background: transparent;
+    border: border-input-focused;
+    outline: 0;
+    color: color-input-focused;
+}
+
+.form label,
+.form .label,
+.form legend {
+    display: block;
+    outline: 0;
+    font-weight: 600;
+}
+
+.form fieldset {
+    padding: 0;
+    border-width: 0;
+}
+
+input[type="checkbox"].input,
+input[type="radio"].input {
+    display: inline;
+}
+label > .label-body, .label > .label-body {
+    display: inline-block;
+    margin-left: .5rem;
+    font-weight: normal;
+}
+
+
+
+textarea.input {
+    min-height: 8em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    max-width: 100%;
+}
+
+/* Actions */
+.action > input[type="email"],
+.action > input[type="number"],
+.action > input[type="search"],
+.action > input[type="text"],
+.action > input[type="tel"],
+.action > input[type="url"],
+.action > input[type="password"],
+.action > select {
+    width: auto;
+    border-right-color: transparent;
+}
+
+.action > *:nth-child(n+2) {
+    margin-left: -1px;
+}
+
+.form {
+
+}
+
+.form.success {
+
+}
+
+.form.error {
+
+}

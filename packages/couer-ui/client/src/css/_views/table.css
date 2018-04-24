@@ -1,0 +1,38 @@
+@value  color-white-slightly-darkened, color-white from '!theme';
+
+.table th,
+.table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid color-white-slightly-darkened;
+}
+.table th:first-child,
+.table td:first-child {
+    /*padding-left: 6px; */
+    border-left: 1px solid color-white;
+}
+
+.table th:last-child,
+.table td:last-child {
+    /*padding-right: 6px; */
+    border-right: 1px solid color-white;
+}
+
+.table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+.table.striped tbody > tr:nth-child(2n) {
+    background: color-white;
+}
+
+.table.striped thead tr {
+    border-top: 1px solid color-white-darkened;
+    background: color-white;
+}
+
+.table.selectable {
+
+}

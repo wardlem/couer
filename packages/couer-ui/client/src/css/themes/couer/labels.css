@@ -1,0 +1,44 @@
+/* Labels */
+.label {
+  /* composes: label-base; */
+  border-radius: border-radius;
+  line-height: 1.2;
+  padding: .1rem .15rem;
+
+  color: color(body-font-color lightness(+5%));
+  background: bg-color-dark;
+  display: inline-block;
+
+  /* Label rounded */
+  &.label-rounded {
+    border-radius: 5rem;
+    padding-left: .4rem;
+    padding-right: .4rem;
+  }
+
+  /* Label colors */
+  &.label-primary {
+    color: light-color;
+    background: primary-color;
+  }
+
+  &.label-secondary {
+    color: primary-color;
+    background: secondary-color;
+  }
+
+  &.label-success {
+    color: light-color;
+    background: success-color;
+  }
+
+  &.label-warning {
+    color: light-color;
+    background: warning-color;
+  }
+
+  &.label-error {
+    color: light-color;
+    background: error-color;
+  }
+}

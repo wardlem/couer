@@ -1,3 +1,4 @@
+
 const merge = require('merge-descriptors');
 const pluralize = require('pluralize');
 const ListUI = require('./listui');
@@ -9,7 +10,7 @@ function ModelUI(options) {
     const {
         basepath = Model.collectionName,
         apipath = `/${Model.collectionName.toLowerCase()}`,
-        displayKey = '',
+        displayKey = Model.pk,
         listType = 'table',
         displayType = 'display',
         createType = 'form',
@@ -17,10 +18,16 @@ function ModelUI(options) {
         deleteType = 'form',
         menuTitle = pluralize(Model.name),
         listTitle = menuTitle,
-        displayTitle = displayKey ? bindClosure((m, o) => `${listTitle} -> ${o[displayKey]}`, {listTitle, displayKey}) : `${listTitle} ➜ View`,
-        createTitle = bindClosure((m, o) => `${listTitle} -> New`, {listTitle}),
-        editTitle = displayKey ? bindClosure((m, o) => `${listTitle} -> ${o[displayKey]} -> Edit`, {listTitle, displayKey}) : `${listTitle} ➜ Edit`,
-        deleteTitle = displayKey ? bindClosure((m, o) => `${listTitle} -> ${o[displayKey]} -> Delete`, {listTitle, displayKey}) : `${listTitle} ➜ Delete`,
+        displayTitle = displayKey
+            ? bindClosure((m, o) => [m('a[href="./"]', {oncreate: m.route.link}, [listTitle]), o[displayKey]], {listTitle, displayKey})
+            : bindClosure((m, o) => [m('a[href="./"]', {oncreate: m.route.link}, [listTitle]), 'View'], {listTitle}),
+        createTitle = bindClosure((m, o) => [m('a[href="./"]', {oncreate: m.route.link}, [listTitle]), 'New'], {listTitle}),
+        editTitle = displayKey
+            ? bindClosure((m, o) => [m('a[href="../"]', {oncreate: m.route.link}, [listTitle]), m('a[href="./"]', {oncreate: m.route.link}, o[displayKey]), 'Edit'], {listTitle, displayKey})
+            :  bindClosure((m, o) => [m('a[href="../"]', {oncreate: m.route.link}, [listTitle]), m('a[href="./"]', {oncreate: m.route.link}, 'Item'), 'Edit'], {listTitle}),
+        deleteTitle = displayKey
+            ? bindClosure((m, o) => [m('a[href="../"]', {oncreate: m.route.link}, [listTitle]), m('a[href="./"]', {oncreate: m.route.link}, o[displayKey]), 'Delete'], {listTitle, displayKey})
+            :  bindClosure((m, o) => [m('a[href="../"]', {oncreate: m.route.link}, [listTitle]), m('a[href="./"]', {oncreate: m.route.link}, 'Item'), 'Delete'], {listTitle}),
         labels = {},
         columns = null,
         fields = null,

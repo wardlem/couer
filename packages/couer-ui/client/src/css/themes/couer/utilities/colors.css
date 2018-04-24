@@ -1,0 +1,122 @@
+/* Text colors */
+/* @include text-color-variant(".text-primary", primary-color); */
+.text-primary {
+  color: primary-color;
+}
+
+a.text-primary {
+  &:focus,
+  &:hover {
+    color: color(primary-color lightness(-5%));
+  }
+}
+
+/* @include text-color-variant(".text-secondary", secondary-color-dark); */
+.text-secondary {
+  color: secondary-color-dark;
+}
+
+a.text-secondary {
+  &:focus,
+  &:hover {
+    color: color(secondary-color-dark lightness(-5%));
+  }
+}
+
+/* @include text-color-variant(".text-gray", gray-color); */
+.text-gray {
+  color: gray-color;
+}
+
+a.text-gray {
+  &:focus,
+  &:hover {
+    color: color(gray-color lightness(-5%));
+  }
+}
+
+/* @include text-color-variant(".text-light", light-color); */
+.text-light {
+  color: light-color;
+}
+a.text-light {
+  &:focus,
+  &:hover {
+    color: color(light-color lightness(-5%));
+  }
+}
+
+/* @include text-color-variant(".text-success", success-color); */
+.text-success {
+  color: success-color;
+}
+a.text-success {
+  &:focus,
+  &:hover {
+    color: color(success-color lightness(-5%));
+  }
+}
+
+/* @include text-color-variant(".text-warning", warning-color); */
+.text-warning {
+  color: warning-color;
+}
+a.text-warning {
+  &:focus,
+  &:hover {
+    color: color(warning-color lightness(-5%));
+  }
+}
+
+
+/* @include text-color-variant(".text-error", error-color); */
+.text-error {
+  color: error-color;
+}
+a.text-error {
+  &:focus,
+  &:hover {
+    color: color(error-color lightness(-5%));
+  }
+}
+
+/* Background colors */
+/* @include bg-color-variant(".bg-primary", primary-color); */
+.bg-primary {
+  background: primary-color;
+}
+
+/* @include bg-color-variant(".bg-secondary", secondary-color); */
+.bg-secondary {
+  background: secondary-color;
+}
+
+/* @include bg-color-variant(".bg-dark", dark-color); */
+.bg-light {
+  background: light-color;
+}
+
+/* @include bg-color-variant(".bg-dark", dark-color); */
+.bg-dark {
+  background: dark-color;
+}
+
+/* @include bg-color-variant(".bg-gray", bg-color); */
+.bg-gray {
+  background: gray-color;
+}
+
+/* @include bg-color-variant(".bg-success", success-color); */
+.bg-success {
+  background: success-color;
+}
+
+/* @include bg-color-variant(".bg-warning", warning-color); */
+.bg-warning {
+  background: warning-color;
+}
+
+/* @include bg-color-variant(".bg-error", error-color); */
+.bg-error {
+  background: error-color;
+}

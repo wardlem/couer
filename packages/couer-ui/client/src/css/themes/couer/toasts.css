@@ -1,0 +1,53 @@
+/* Toasts */
+.toast {
+  /* @include toast-variant(dark-color); */
+  background: color(dark-color a(90%));
+  border-color: dark-color;
+
+  border: border-width solid dark-color;
+  border-radius: border-radius;
+  color: light-color;
+  display: block;
+  padding: layout-spacing;
+  width: 100%;
+
+  &.toast-primary {
+    /* @include toast-variant(primary-color); */
+    background: color(primary-color a(90%));
+    border-color: primary-color;
+  }
+
+  &.toast-success {
+    /* @include toast-variant(success-color); */
+    background: color(success-color a(90%));
+    border-color: success-color;
+  }
+
+  &.toast-warning {
+    /* @include toast-variant(warning-color); */
+    background: color(warning-color a(90%));
+    border-color: warning-color;
+  }
+
+  &.toast-error {
+    /* @include toast-variant(error-color); */
+    background: color(error-color a(90%));
+    border-color: error-color;
+  }
+
+  a {
+    color: light-color;
+    text-decoration: underline;
+
+    &:focus,
+    &:hover,
+    &:active,
+    &.active {
+      opacity: .75;
+    }
+  }
+
+  .btn-clear {
+    margin: 4px -2px 4px 4px;
+  }
+}

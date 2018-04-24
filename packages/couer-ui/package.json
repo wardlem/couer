@@ -11,24 +11,32 @@
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "browserify": "16.1.1",
     "bytes": "^3.0.0",
-    "debug": "^3.1.0",
-    "merge-descriptors": "^1.0.1",
-    "ramda": "^0.25.0",
+    "couer-router": "*",
     "couer-util": "*",
-    "systemjs": "0.21.0"
+    "css-modulesify": "^0.28.0",
+    "debug": "^3.1.0",
+    "fluture": "^7.1.2",
+    "lost": "^8.2.1",
+    "merge-descriptors": "^1.0.1",
+    "mithril": "1.1.6",
+    "mkdirp": "^0.5.1",
+    "parcel-bundler": "1.7.0",
+    "pluralize": "*",
+    "postcss-assets": "^5.0.0",
+    "postcss-calc": "^6.0.1",
+    "postcss-color-function": "^4.0.1",
+    "postcss-conditionals": "^2.1.0",
+    "postcss-import": "^11.1.0",
+    "postcss-mixins": "^6.2.0",
+    "postcss-nested": "^3.0.0",
+    "postcss-simple-vars": "^4.1.0",
+    "ramda": "^0.25.0"
   },
   "devDependencies": {
-    "browserify": "^14.4.0",
-    "eslint": "^4.3.0",
-    "exorcist": "^0.4.0",
     "expect": "^1.20.2",
-    "mithril": "^1.1.3",
     "mocha": "^3.4.2",
-    "nyc": "^11.0.3",
-    "redux": "^3.7.2",
-    "watchify": "^3.9.0",
-    "couer-util": "*",
-    "couer-httpserver": "*"
+    "nyc": "^11.0.3"
   }
 }

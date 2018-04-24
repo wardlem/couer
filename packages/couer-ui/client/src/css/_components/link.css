@@ -1,0 +1,12 @@
+@value color-blue, color-blue-lightened from '!theme';
+
+@value color-link: color-blue;
+@value color-link-hover: color-blue-lightened;
+
+.link {
+    color: color-link;
+}
+
+.link:hover {
+    color: color-link-hover;
+}

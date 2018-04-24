@@ -1,0 +1,356 @@
+/* @custom-selector .button button, .button, input[type="submit"], input[type="reset"], input[type="button"] */
+
+@value color-gray, color-gray-lightened, color-white, color-white-darkened, color-primary, color-primary-darkened, color-secondary, color-secondary-darkened, color-positive, color-positive-darkened, color-negative, color-negative-darkened, transition-default, opacity-disabled from '!theme';
+
+/* TODO: these need to be in the theme */
+@value height-button: 4em;
+@value padding-button-x: 30px;
+@value padding-button-y: 0;
+@value padding-button: padding-button-y padding-button-x;
+@value font-size-button: 1.1rem;
+@value font-size-button-mini: 0.8rem;
+@value font-size-button-tiny: 0.9rem;
+@value font-size-button-small: 1rem;
+@value font-size-button-large: 1.2rem;
+@value font-size-button-big: 1.4rem;
+@value font-size-button-huge: 1.6rem;
+@value font-size-button-massive: 1.8rem;
+@value font-weight-button: 600;
+@value border-width-button: 1px;
+@value border-radius-button: 0;
+@value border-style-button: solid;
+
+.button {
+    display: inline-block;
+    height: height-button;
+    min-width: height-button;
+    padding: padding-button;
+    color: color-gray;
+    text-align: center;
+    font-size: font-size-button;
+    font-weight: font-weight-button;
+    line-height: height-button;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 0;
+    border: border-width-button border-style-button color-gray-lightened;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all transition-default;
+}
+
+.button:focus, .button:hover {
+    color: color-gray-darkened;
+    /*border-color: color-black-lightened, color-black;*/
+    outline: 0;
+    background: color-white-darkened;
+}
+
+.button.primary {
+    color: color-white;
+    background-color: color-primary;
+    border-color: color-primary;
+}
+
+.button.primary.basic {
+    color: color-primary;
+}
+
+.button.primary:hover {
+    color: color-white;
+    background-color: color-primary-darkened;
+    border-color: color-primary-darkened;
+}
+
+.button.primary.basic:hover {
+    color: color-primary-darkened;
+}
+
+.button.secondary {
+    color: color-white;
+    background-color: color-secondary;
+    border-color: color-secondary;
+}
+
+.button.secondary.basic {
+    color: color-secondary;
+}
+
+.button.secondary:hover {
+    color: color-white;
+    background-color: color-secondary-darkened;
+    border-color: color-secondary-darkened;
+}
+
+.button.secondary.basic:hover {
+    color: color-secondary-darkened;
+}
+
+.button.positive {
+    color: color-white;
+    background-color: color-positive;
+    border-color: color-positive;
+}
+
+.button.positive.basic {
+    color: color-positive;
+}
+
+.button.positive:hover {
+    color: color-white;
+    background-color: color-positive-darkened;
+    border-color: color-positive-darkened;
+}
+
+.button.positive.basic:hover {
+    color: color-positive-darkened;
+}
+
+
+.button.negative {
+    color: color-white;
+    background-color: color-negative;
+    border-color: color-negative;
+}
+
+.button.negative.basic {
+    color: color-negative;
+}
+
+.button.negative:hover {
+    color: color-white;
+    background-color: color-negative-darkened;
+    border-color: color-negative-darkened;
+}
+
+.button.negative.basic:hover {
+    color: color-negative-darkened;
+}
+
+
+/* social */
+/* .button.facebook {
+    color: white;
+    background-color: facebook;
+    border-color: facebook;
+}
+
+.button.facebook:hover {
+    color: white;
+    background-color: facebook-darkened;
+    border-color: facebook-darkened;
+}
+
+.button.twitter {
+    color: white;
+    background-color: twitter;
+    border-color: twitter;
+}
+
+.button.twitter:hover {
+    color: white;
+    background-color: twitter-darkened;
+    border-color: twitter-darkened;
+}
+
+.button.google {
+    color: white;
+    background-color: google;
+    border-color: google;
+}
+
+.button.google:hover {
+    color: white;
+    background-color: google-darkened;
+    border-color: google-darkened;
+}
+
+.button.vk {
+    color: white;
+    background-color: vk;
+    border-color: vk;
+}
+
+.button.vk:hover {
+    color: white;
+    background-color: vk-darkened;
+    border-color: vk-darkened;
+}
+
+.button.linkedin {
+    color: white;
+    background-color: linkedin;
+    border-color: linkedin;
+}
+
+.button.linkedin:hover {
+    color: white;
+    background-color: linkedin-darkened;
+    border-color: linkedin-darkened;
+}
+
+.button.instagram {
+    color: white;
+    background-color: instagram;
+    border-color: instagram;
+}
+
+.button.instagram:hover {
+    color: white;
+    background-color: instagram-darkened;
+    border-color: instagram-darkened;
+}
+
+.button.youtube {
+    color: white;
+    background-color: youtube;
+    border-color: youtube;
+}
+
+.button.youtube:hover {
+    color: white;
+    background-color: youtube-darkened;
+    border-color: youtube-darkened;
+} */
+
+/* Basic */
+.button.basic {
+    background-color: color-white;
+}
+
+.button.basic:hover {
+    background-color: color-white;
+    /*border-color: black-darkened;*/
+    color: color-black-darkened;
+}
+
+.button.icon {
+    padding-left: padding-button-y;
+    padding-right: padding-button-y;
+    min-width: height-button;
+}
+
+.button.icon .icon {
+    vertical-align: middle;
+}
+
+.button .icon {
+    color: inherit;
+}
+
+.button.circle.icon {
+    border-radius: height-button;
+}
+
+/* States */
+.button.disabled, .button.disabled:hover {
+    cursor: default;
+    opacity: opacity-disabled;
+    pointer-events: none;
+}
+
+.button.active {
+
+}
+
+/*
+.button.loading {
+    position: relative;
+    cursor: default;
+    text-shadow: none !important;
+    color: transparent !important;
+    opacity: 1;
+    pointer-events: auto;
+    -webkit-transition: all 0s linear, opacity 0.1s ease;
+    transition: all 0s linear, opacity 0.1s ease;
+}
+
+.button.loading:before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -0.64285714em 0em 0em -0.64285714em;
+    width: 1.28571429em;
+    height: 1.28571429em;
+    border-radius: 500rem;
+    border: 0.2em solid rgba(0, 0, 0, 0.15);
+}
+
+.button.loading:after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -0.64285714em 0em 0em -0.64285714em;
+    width: 1.28571429em;
+    height: 1.28571429em;
+    -webkit-animation: button-spin 0.6s linear;
+          animation: button-spin 0.6s linear;
+    -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+    border-radius: 500rem;
+    border-color: #FFFFFF transparent transparent;
+    border-style: solid;
+    border-width: 0.2em;
+    box-shadow: 0px 0px 0px 1px transparent;
+}
+
+*/
+
+/* Sizes */
+.button.mini {
+    font-size: font-size-button-mini;
+}
+
+.button.tiny {
+    font-size: font-size-button-tiny;
+}
+
+.button.small {
+    font-size: font-size-button-small;
+}
+
+.button.large {
+    font-size:  font-size-button-large;
+}
+
+.button.big {
+    font-size: font-size-button-big;
+}
+
+.button.huge {
+    font-size: font-size-button-huge;
+}
+
+.button.massive {
+    font-size:  font-size-button-massive;
+}
+
+
+/* groups */
+.buttons {
+    width: auto;
+}
+
+.buttons > .button {
+    margin-right: -5px;
+    border-right-width: 0;
+    border-left-width: 0;
+}
+
+.buttons > .button.disabled {
+    opacity: 1;
+}
+
+.buttons > .button:first-child {
+    border-left-width: border-width-button;
+}
+
+.buttons > .button:last-child {
+    border-right-width: border-width-button;
+    margin-right: 0;
+}

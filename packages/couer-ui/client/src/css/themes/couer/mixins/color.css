@@ -1,0 +1,24 @@
+/* Background color utility mixin */
+@define-mixin bg-color-variant name: ".bg-primary", color: primary-color {
+  name {
+    background: color;
+
+    /* @if (lightness(color) < 60) {
+      color: light-color;
+    } */
+  }
+}
+
+/* Text color utility mixin */
+@define-mixin text-color-variant name: ".text-primary", color: primary-color {
+  name {
+    color: color;
+  }
+
+  aname {
+    &:focus,
+    &:hover {
+      color: color(color lightness(-5%));
+    }
+  }
+}

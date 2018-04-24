@@ -1,15 +1,38 @@
 const m = require('mithril');
+const debug = require('debug')('couer:TableView');
+
+const Buttons = require('../components/Buttons');
+const Button = require('../components/Button');
+const SearchBox = require('../components/SearchBox');
+const Action = require('../components/Action');
+const Link = require('../components/Link');
+
+const styles = Object.assign(
+    {},
+    require('../../css/components/box.css'),
+    require('../../css/components/controls.css')
+    // require('../../css/util.css')
+    // require('../../css/views/table.css'),
+);
 
 const TableState = require('../state/TableState.js');
-console.log('TABLESTATE', TableState);
 const LoadingView = require('./LoadingView.js');
 
 const Table = {
     view: function(vnode) {
-        return m('', [
-            m(TableMenu),
+        const {theme = Couer.theme} = vnode.attrs;
+        return m('div', {
+            style: {
+                // maxWidth: '1200px',
+                marginRight: 'auto',
+                marginLeft: 'auto',
+                paddingLeft: '1.8rem',
+                paddingRight: '1.8rem',
+            },
+        }, [
+            m(TableMenu, vnode.attrs),
             m('', [
-                m('table.full-width.striped.selectable.table', [
+                m(`table.${theme.table}.${styles['box-raised']}.${theme['table-hover']}.${theme['bg-light']}.${theme['rounded']}`, [
                     m(TableHead, vnode.attrs),
                     m(TableBody, vnode.attrs),
                 ]),
@@ -20,31 +43,44 @@ const Table = {
 
 const TableMenu = {
     view: function(vnode) {
+        const {theme = Couer.theme} = vnode.attrs;
         const {meta, search} = TableState;
         const {total, page} = meta;
         const start = total === 0 ? 0 : Math.max(0, ((page.number - 1) * page.size + 1));
         const end = Math.min(total, page.number * page.size);
 
-        return m('.controls.clearfix.box', [
+        return m(`.${styles.controls}.${theme.clearfix}.${styles.box}`, [
             m('', [
                 `Showing ${start} \u2013 ${end} of ${total}`,
             ]),
-            m('.action.float-right', [
-                m('input', {
-                    type: 'text',
+            m(Action, {classes: `.${theme['float-right']}`}, [
+                m(SearchBox, {
                     placeholder: 'Search...',
                     value: search,
-                    onkeypress: (e) => {
-                        if (e.code === 'Enter') {
-                            // TODO: submit search
-                        }
+                    onsubmit: (value) => {
+                        // TODO
+                        debug('search submitted:', value);
+                    },
+                    oninput: (value) => {
+                        console.log('oninput', value);
+                        TableState.search = value;
                     },
                 }),
-                m('button.icon.secondary', {
-                    onclick: (e) => {
-                        // TODO: submit search
-                    },
-                }, m('i.search.icon')),
+                // m('input', {
+                //     type: 'text',
+                //     placeholder: 'Search...',
+                //     value: search,
+                //     onkeypress: (e) => {
+                //         if (e.code === 'Enter') {
+                //             // TODO: submit search
+                //         }
+                //     },
+                // }),
+                // m(`button.${theme.icon}.${styles['button-secondary']}`, {
+                //     onclick: (e) => {
+                //         // TODO: submit search
+                //     },
+                // }, m(`i.${styles.search}.${styles.icon}`)),
             ]),
         ]);
     },
@@ -55,19 +91,15 @@ const TableHead = {
         const {columns = [], sortKey = ''} = vnode.attrs;
         return m('thead', m('tr', columns.map((column) => {
             const {sortable = false, label = ''} = column;
-            const tag = sortable ? 'a.link[href=#]' : 'span';
+            const child = sortable ? m(Link, {
+                onclick: (e) => {
+                    e.preventDefault();
+                    debug('set sort to ', column.key);
+                },
+            }, [label]) : m('span', [label]);
 
             return m('th', [
-                m(tag, {
-                    style: {
-                        cursor: sortable ? 'cursor' : 'default',
-                    },
-                    onclick: sortable ? (e) => {
-                        e.preventDefault();
-                        console.log('set sort to ', column.key);
-                        // setSort(state, dispatch, sortKeys[label]);
-                    } : undefined,
-                }, [label]),
+                child,
             ]);
         })));
     },
@@ -114,72 +146,60 @@ const TableRow = {
 
 const TablePagination = {
     view: function(vnode) {
+        const {theme = Couer.theme} = vnode.attrs;
         const {meta} = TableState;
         const {page} = meta;
-        const {count, number, size} = page;
+        const {count,  number,  size} = page;
+        let min = Math.max(1, number - 1);
+        let max = Math.min(count, number + 1);
 
-        const min = Math.max(1, number - 4);
-        const max = Math.min(count, number + 4);
-
-        console.log('MIN:', min, 'MAX:', max);
+        // if (min === 1)
+        // {
+        //     max = Math.min(count, number - (number - 4));
+        // }
+        // else if (max === count)
+        // {
+        //     min = Math.max(1, number - (nu))
+        // }
 
         const numbered = [];
         for (let i = min; i <= max; i += 1) {
-            numbered.push(m(`button.ui.button${i === page.number ? '.active' : ''}`, {
-                // href: 'javascript:void(null)',
-                onclick: () => {
-                    // TODO
-                    // goToPage(state, dispatch, i),
-                },
-            }, [i]));
+            let activeClass = i === number ? `.${theme.active}` : '';
+            numbered.push(m(`li.${theme['page-item']}${activeClass}`, [m('a', [i])]));
         }
 
         const buttons = [
-            m(`.ui.icon.button${number === 1 ? '.disabled' : ''}`, {
-                on: {
-                    // click: goToPage.bind(null, state, dispatch, page.number - 1),
-                },
-            }, [
-                m('i.left.arrow.icon'),
-            ]),
-            m(`.ui.button${number === 1 ? '.active' : ''}`, {
-                // 'class': {active: page.number === 1},
-                // props: {href: '#'},
-                on: {
-                    // click: goToPage.bind(null, state, dispatch, 1),
-                },
-            }, ['First']),
+            m(`li.${theme['page-item']}${number === 1 || count === 0 ? `.${theme.disabled}` : ''}`, [m('a', ['Prev'])]),
+            m(`li.${theme['page-item']}${min === 1 || count === 0 ? `.${theme['d-none']}` : ''}`, [m('a', ['1'])]),
+            m(`li.${theme['page-item']}${min === 1 || count === 0 ? `.${theme['d-none']}` : ''}`, [m('span', ['...'])]),
+
+
+            // m(`li.${theme['page-item']}${number === 1 ? `.${theme.disabled}` : ''}`, [m('a', ['Prev'])]),
+            // m(Button, {icon: 'left arrow', title: 'previous', disabled: number === 1}),
+            // m(Button, {active: number === 1}, 'First'),
         ].concat(numbered).concat([
-            m(`.ui.button${page.number === count || count === 0 ? '.active' : ''}`, {
-                'class': {active: page.number === count || count === 0},
-                props: {href: '#'},
-                on: {
-                    // click: goToPage.bind(null, state, dispatch, count),
-                },
-            }, ['Last']),
-            m(`.ui.right.icon.button${page.number === count || count === 0 ? '.disabled' : ''}`, {
-                // 'class': {disabled: page.number === count || count === 0},
-                on: {
-                    // click: goToPage.bind(null, state, dispatch, page.number + 1),
-                },
-            }, [
-                m('i.right.arrow.icon'),
-            ]),
+            // m(Button, {active: page.number === count || count === 0}, ['Last']),
+            // m(Button, {icon: 'right arrow', title: 'next', disabled: page.number === count || count === 0}),
+            m(`li.${theme['page-item']}${max === count || count === 0 ? `.${theme['d-none']}` : ''}`, [m('span', ['...'])]),
+            m(`li.${theme['page-item']}${max === count || count === 0 ? `.${theme['d-none']}` : ''}`, [m('a', [String(count)])]),
+            m(`li.${theme['page-item']}${number === count || count === 0 ? `.${theme.disabled}` : ''}`, [m('a', ['Next'])]),
         ]);
 
-        return m('.ui.container.center.aligned.padded', {
-            style: {
-                marginTop: '20px',
-            },
-        }, [
-            m('.ui.buttons.centered', buttons),
+        // return m(`.${styles['align-center']}.${styles.container}`, {
+        return m(`.${theme['text-center']}`, [
+            m(`ul.${theme.pagination}.${theme['flex-centered']}`, {
+                style: {
+                    marginTop: '20px',
+                },
+            }, buttons),
         ]);
     },
 };
 
-function TableView(def) {
+function TableView(def, theme) {
     const {datasource} = def;
     return {
+        __proto__: TableView.prototype,
         title: def.title || 'Table',
         path: def.path,
         oninit: function() {
@@ -189,14 +209,14 @@ function TableView(def) {
             const {loading, error} = TableState;
             let child;
             if (loading) {
-                child = m(LoadingView);
+                child = m(LoadingView, {theme});
             } else if (error) {
                 child = m('p', TableState.error);
             } else {
                 child = m('div.full-width', [
-                    m('h2.ui.dividing.header', [typeof def.title === 'function' ? def.title(m, TableState.records) : def.title]),
-                    m(Table, def),
-                    m(TablePagination),
+                    // TODO: move header to component
+                    m(Table, Object.assign({theme}, def)),
+                    m(TablePagination, {theme}),
                 ]);
             }
             return child;

@@ -1,15 +1,22 @@
-// const generate = require('escodegen').generate;
-// const lave = require('lave');
 const {uneval} = require('couer-util');
-module.exports = function generateUserInterfaceJavascript(data) {
-    // const appData = {
-    //     views: data.views,
-    //     menulinks: data.menulinks,
-    //     contextmenus: data.contextmenus,
-    //     title: data.title,
-    // };
+const {resolve} = require('path');
+module.exports = function generateUserInterfaceJavascript(data, viewpaths) {
 
     const appDataSrc = uneval(data);
+    const viewpathsSrc = Object.keys(viewpaths).map((viewname) => {
+        const viewpath = viewpaths[viewname];
+        return `${viewname}: require('${viewpath}')`;
+    }).join(', ');
 
-    return `module.exports = ${appDataSrc}`;
+    return `
+        if (typeof window.Couer !== 'object') {
+            window.Couer = {};
+        }
+
+        var views = {${viewpathsSrc}};
+        window.Couer.UI = require('${resolve(__dirname, '../client/src/js/couerui.js')}');
+        window.Couer.appdata = ${appDataSrc};
+        window.Couer.views = views;
+        window.Couer.theme = require('${data.themepath}');
+    `;
 };

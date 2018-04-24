@@ -1,5 +1,11 @@
 const m = require('mithril');
 
+const styles = Object.assign(
+    {}
+    // require('../../../css/components/form.css')
+);
+
+
 module.exports = {
     view: (vnode) => {
         const {
@@ -14,15 +20,17 @@ module.exports = {
             value = '',
             hide = false,
             name = key,
+            theme = Couer.theme,
         } = vnode.attrs;
 
-        return m(`.${width}.wide.field${error ? '.error' : ''}${hide ? '.hidden' : ''}`, {
-            style: {
-                display: hide ? 'none' : 'initial',
+        // TODO: widths...
+        return m(`.${width}-wide.${theme['form-group']}${error ? `.${theme['has-error']}` : ''}${hide ? `.${theme['d-none']}` : ''}`, {
+            'class': {
+                [theme['d-none']]: hide,
             },
         }, [
-            m('.label', [label]),
-            m('input', {
+            m(`label.${theme['form-label']}`, [label]),
+            m(`input.${theme['form-input']}.${theme['input-sm']}`, {
                 name,
                 type,
                 placeholder,

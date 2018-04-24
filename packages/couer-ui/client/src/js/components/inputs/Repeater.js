@@ -1,6 +1,15 @@
 const m = require('mithril');
 const BaseInput = require('./BaseInput.js');
 
+const styles = Object.assign({},
+    require('../../../css/components/box.css')
+);
+
+const Segment = require('../Segment');
+const Header = require('../Header');
+const Items = require('../Items');
+const Item = require('../Item');
+
 const Repeater = function Repeater(def) {
     const createInput = require('./createInput.js');
     const subinput = createInput(def.subdef);
@@ -17,23 +26,25 @@ const Repeater = function Repeater(def) {
                 value,
                 name = def.key,
                 oninput,
+                theme = Couer.theme,
             } = vnode.attrs;
 
-            return m('.ui.segment', [
-                m('.ui.sub.header', [def.label]),
-                m('.ui.striped.items', (value || []).map((subvalue, index) => {
+            return m(`.${styles.box}.${styles['form-box']}.${theme['bg-light']}`, [
+                m(`label.${theme['form-label']}.${theme['text-secondary']}.${theme['text-bold']}`, [def.label]),
+                m(`.${theme.divider}`),
+                m(`.${theme['']}`, (value || []).map((subvalue, index) => {
                     const suboninput = (subkey, newsubvalue) => {
                         console.log('subform suboniput', subkey, index, newsubvalue);
                         const newvalue = value.slice(0, index).concat([newsubvalue]).concat(value.slice(index + 1));
                         oninput(def.key, newvalue);
                     };
-                    return [m('.item', [
-                        m('', {
+                    return [m(Item, [
+                        m(`.${theme.clearfix}`, {
                             style: {
                                 marginRight: '0.75rem',
                             },
                         }, [
-                            m('.ui.right.floated.red.circular.label', {
+                            m(`button.${theme.btn}.${theme['btn-action']}.${theme.circle}.${theme['btn-sm']}${repeater.hovered === index ? `.${theme['btn-error']}` : ''}.${theme['float-right']}`, {
                                 onmouseenter: (e) => {
                                     console.log('repeater is', repeater);
                                     repeater.hovered = index;
@@ -44,6 +55,7 @@ const Repeater = function Repeater(def) {
                                     }
                                 },
                                 onclick: (e) => {
+                                    e.preventDefault();
                                     if (def.confirmRemove) {
                                         // TODO: show confirm modal
                                     }
@@ -54,26 +66,28 @@ const Repeater = function Repeater(def) {
                                 style: {
                                     cursor: 'pointer',
                                 },
-                            }, (repeater.hovered === index) ? m('i.trash.icon', {
+                            }, (repeater.hovered === index) ? m(`i.${theme.icon}.${theme['icon-cross']}`, {
                                 style: {
                                     margin: 0,
                                 },
-                            }) : [String(index + 1)]),
+                            }) : [m('i', [String(index + 1)])]),
                         ]),
                         m('.ui.content', [
                             m(subinput, Object.assign({}, vnode.attrs, {value: subvalue, name: `${name}[${index}]`, oninput: suboninput})),
                         ]),
-                    ]), m('.ui.divider')];
-                }).concat([
-                    value.length < maxlen ? m('.item', [
+                    ]), m(`.${theme.divider}`)];
+                })),
+                m(`.${theme['']}`, [].concat([
+                    value.length < maxlen ? m(`.${theme.clearfix}`, [
                         m('', {
                             style: {
                                 marginRight: '0.75rem',
                             },
                         }, [
-                            m('.ui.right.floated.blue.circular.label', {
+                            m(`button.${theme.btn}.${theme['btn-action']}.${theme.circle}.${theme['btn-sm']}.${theme['btn-success']}.${theme['float-right']}`, {
 
                                 onclick: (e) => {
+                                    e.preventDefault();
 
                                     console.log('add', value.length);
                                     const newitem = subinput.default();
@@ -84,7 +98,7 @@ const Repeater = function Repeater(def) {
                                 style: {
                                     cursor: 'pointer',
                                 },
-                            },  m('i.plus.icon', {
+                            },  m(`i.${theme.icon}.${theme['icon-plus']}`, {
                                 style: {
                                     margin: 0,
                                 },

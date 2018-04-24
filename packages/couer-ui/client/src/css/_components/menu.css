@@ -1,0 +1,40 @@
+@value color-gray, color-gray-lightened, color-black, color-black-lightened, color-white from '!theme';
+
+.menu .header {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: gray;
+    padding: 0 2rem;
+    margin-top: 1.2em;
+    /*margin-bottom: -1em;*/
+    /*height: 3.2rem;*/
+    line-height: 2.8;
+    vertical-align: bottom;
+}
+
+.menu .item {
+    display: block;
+    text-decoration: none;
+    /*height: 3.2rem;*/
+    font-size: 1.6rem;
+    color: color-gray-lightened;
+    padding: 0 2rem;
+    line-height: 2.8;
+    transition: var(--transition-default, none);
+}
+
+.menu .item .icon {
+    margin-right: 1em;
+    width: 1em;
+}
+
+.menu .item:hover {
+    /*height: 3.2rem;*/
+    background: color-black-lightened;
+    color: white;
+}
+
+.menu .item.active {
+    background: color-secondary;
+    color: white;
+}

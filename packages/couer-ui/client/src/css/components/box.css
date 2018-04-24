@@ -1,0 +1,21 @@
+@value light-color, dark-color, border-width, border-color-dark, border-radius, control-padding-y, control-padding-x, unit-3 from '!theme';
+
+@value shadow-color: color(#454d5d a(30%));
+
+.box {
+    /* background: light-color; */
+    display: block;
+    padding:  1em 0;
+    margin-bottom: 1em;
+}
+
+.box-raised {
+  box-shadow: 0 .05rem calc((.05rem + .05rem) * 2) shadow-color;
+}
+
+.form-box {
+  margin-top: unit-3;
+  border: border-width solid border-color-dark;
+  border-radius: border-radius;
+  padding: control-padding-y control-padding-x;
+}

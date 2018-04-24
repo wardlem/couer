@@ -12,6 +12,7 @@ function SelectInput(def) {
         hide,
         width,
         placeholder,
+        theme = Couer.theme,
     } = def;
 
     return BaseInput({
@@ -19,13 +20,13 @@ function SelectInput(def) {
         'default': typeof def.default === 'function ' ? def.default : () => def.default,
         view: (vnode) => {
             const {error, value, oninput, name = key} = vnode.attrs;
-            return m(`.${width}.wide.field${error ? '.error' : ''}`, {
+            return m(`.${theme['form-group']}.${width}.wide.field${error ? '.error' : ''}`, {
                 style: {
                     display: hide ? 'none' : undefined,
                 },
             }, [
-                m('.label', [label]),
-                m('select', {
+                m(`label.${theme['form-label']}`, [label]),
+                m(`select.${theme['form-select']}.${theme['select-sm']}`, {
                     name,
                     placeholder,
                     required: Boolean(required),

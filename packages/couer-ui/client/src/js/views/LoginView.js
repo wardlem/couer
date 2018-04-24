@@ -1,12 +1,11 @@
 const SessionState = require('../state/SessionState.js');
 const m = require('mithril');
 
-function findForm(path) {
-    var ind = 0;
-    var el = path[ind];
+function findForm(target) {
+    var el = target;
     while (el && el.tagName !== 'FORM') {
-        ind += 1;
-        el = path[ind];
+        console.log('el is', el);
+        el = el.parentNode;
     }
 
     return el;
@@ -27,6 +26,7 @@ const LoginView = function(def) {
     console.log('def:', def);
     const {submitUrl: loginUrl, submitMethod: loginMethod} = def;
     return {
+        __proto__: LoginView.prototype,
         emailError: false,
         passwordError: false,
         emailValid: true,
@@ -46,8 +46,9 @@ const LoginView = function(def) {
                     m(`form.ui.large.form${hasError ? '.error' : ''}`, {
                         onkeypress: (e) => {
                             if (e.code === 'Enter' && !loggingIn) {
+                                console.log('e:', e);
                                 var path = e.path;
-                                var el = findForm(path);
+                                var el = findForm(e.target);
                                 if (el) {
                                     submitForm(el, loginUrl, loginMethod);
                                 }
@@ -89,8 +90,9 @@ const LoginView = function(def) {
                             m(`.ui.fluid.large.teal.submit.button${loggingIn ? '.disabled' : ''}`, {
                                 onclick: (e) => {
                                     if (!loggingIn) {
+                                        console.log('e:', e);
                                         var path = e.path;
-                                        var el = findForm(path);
+                                        var el = findForm(e.target);
                                         if (el) {
                                             submitForm(el, loginUrl, loginMethod);
                                         }

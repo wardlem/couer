@@ -31,8 +31,8 @@ const SubForm = function SubForm(def) {
                 oninput(def.key, newvalue);
             };
             // console.log('VALUE IS:', value);
-            return m('.formSection', [
-                m('.ui.header', [def.label]),
+            return m('fieldset.formSection', [
+                // m('legend.header', [def.label]),
                 m('', subinputs.map((subinput) => {
                     const subvalue = value[subinput.key];
                     console.log(`${subinput.key} hidden? ${hidden(subinput)} ${subinput.hideif}`);

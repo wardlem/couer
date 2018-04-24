@@ -1,0 +1,48 @@
+@value color-white, transition-default from '!theme';
+
+@value item-spacing 1em;
+@value min-height-item: 0;
+@value background-item: color-white;
+@value padding-item: 0;
+@value border-radius-item: 0;
+@value border-item: none;
+@value box-shadow-item: none;
+@value items-margin: none;
+
+.items > .item {
+  display: block;
+  margin: item-spacing 0em;
+  width: 100%;
+  min-height: 0;
+  background: background-item;
+  padding: padding-item;
+
+  border: border-item;
+  border-radius: border-radius-item;
+  box-shadow: none;
+  transition: all transition-default;
+}
+
+.items > .item a {
+  cursor: pointer;
+}
+
+
+.items {
+  margin: items-margin;
+  lost-util: clearfix;
+}
+
+.items:first-child {
+  margin-top: 0 !important;
+}
+.items:last-child {
+  margin-bottom: 0 !important;
+}
+
+.items > .item:first-child {
+  margin-top: 0;
+}
+.items > .item:last-child {
+  margin-bottom: 0;
+}

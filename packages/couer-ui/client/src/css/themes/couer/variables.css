@@ -1,0 +1,140 @@
+/* VARIABLES */
+
+/* Core features */
+@value rtl:  true;
+
+/* Core colors */
+/* @value primary-color: #5755d9; */
+@value primary-color: #955379;
+@value primary-color-dark:  color(primary-color lightness(-3%));
+@value primary-color-light:  color(primary-color lightness(+3%));
+/* @value secondary-color:  color(primary-color lightness(+37.5%)); */
+@value secondary-color: #e5a660;
+@value secondary-color-dark:  color(secondary-color lightness(-3%));
+@value secondary-color-light:  color(secondary-color lightness(+3%));
+
+/* Gray colors */
+@value dark-color:  #454d5d;
+@value light-color:  #fff;
+@value gray-color:  color(dark-color lightness(+40%));
+/* @value gray-color: #acb3c2; */
+@value gray-color-dark:  color(gray-color lightness(-25%));
+@value gray-color-light:  color(gray-color lightness(+20%));
+
+@value border-color:  color(dark-color lightness(+60%));
+@value border-color-dark:  color(border-color lightness(-10%));
+@value bg-color:  color(dark-color lightness(+66%));
+@value bg-color-dark:  color(bg-color lightness(-3%));
+@value bg-color-light:  light-color;
+
+/* Control colors */
+@value success-color:  #32b643;
+@value warning-color:  #ffb700;
+@value error-color:  #e85600;
+
+/* Other colors */
+@value code-color:  #e06870;
+@value highlight-color:  #ffe9b3;
+@value body-bg:  bg-color-light;
+@value body-font-color:  color(dark-color lightness(+5%));
+@value link-color:  primary-color;
+@value link-color-dark:  color(link-color lightness(-5%));
+
+/* Fonts */
+/* Credit: https://www.smashingmagazine.com/2015/11/using-system-ui-fonts-practical-guide/ */
+@value base-font-family:  -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
+@value mono-font-family:  "SF Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace;
+@value fallback-font-family:  "Helvetica Neue", sans-serif;
+@value cjk-zh-font-family:  base-font-family, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", fallback-font-family;
+@value cjk-jp-font-family:  base-font-family, "Hiragino Sans", "Hiragino Kaku Gothic Pro", "Yu Gothic", YuGothic, Meiryo, fallback-font-family;
+@value cjk-ko-font-family:  base-font-family, "Malgun Gothic", fallback-font-family;
+@value body-font-family:  base-font-family, fallback-font-family;
+
+/* Unit sizes */
+/* @value unit-o:  .05rem;
+@value unit-h:  .1rem;
+@value unit-1:  .2rem;
+@value unit-2:  .4rem;
+@value unit-3:  .6rem;
+@value unit-4:  .8rem;
+@value unit-5:  1rem;
+@value unit-6:  1.2rem;
+@value unit-7:  1.4rem;
+@value unit-8:  1.6rem;
+@value unit-9:  1.8rem;
+@value unit-10:  2rem;
+@value unit-12:  2.4rem;
+@value unit-16:  3.2rem; */
+
+@value unit-o:  .075rem;
+@value unit-h:  .15rem;
+@value unit-1:  .3rem;
+@value unit-2:  .6rem;
+@value unit-3:  .9rem;
+@value unit-4:  1.2rem;
+@value unit-5:  1.5rem;
+@value unit-6:  1.8rem;
+@value unit-7:  2.1rem;
+@value unit-8:  2.4rem;
+@value unit-9:  2.7rem;
+@value unit-10:  3rem;
+@value unit-12:  3.6rem;
+@value unit-16:  4.6rem;
+
+/* Font sizes */
+@value html-font-size:  20px;
+@value html-font-size-value: 20;
+@value html-line-height:  1.5;
+@value font-size:  .8rem;
+@value font-size-sm:  .7rem;
+@value font-size-lg:  .9rem;
+@value line-height:  1rem;
+
+/* Sizes */
+@value layout-spacing:  unit-2;
+@value layout-spacing-sm:  unit-1;
+@value layout-spacing-lg:  unit-4;
+/* @value border-radius:  unit-h; */
+@value border-radius: unit-1;
+@value border-width:  unit-o;
+@value border-width-lg:  unit-h;
+@value control-size:  unit-9;
+@value control-size-sm:  unit-7;
+@value control-size-lg:  unit-10;
+@value control-padding-x:  unit-2;
+@value control-padding-x-sm:  calc(unit-2 * .75);
+@value control-padding-x-lg:  calc(unit-2 * 1.5);
+@value control-padding-y:  calc((control-size - line-height) / 2 - border-width);
+@value control-padding-y-sm:  calc((control-size-sm - line-height) / 2 - border-width);
+@value control-padding-y-lg:  calc((control-size-lg - line-height) / 2 - border-width);
+@value control-icon-size:  .8rem;
+
+@value control-width-xs:  180px;
+@value control-width-sm:  320px;
+@value control-width-md:  640px;
+@value control-width-lg:  960px;
+@value control-width-xl:  1280px;
+
+/* Responsive breakpoints */
+@value size-xs:  480px;
+@value size-sm:  600px;
+@value size-md:  840px;
+@value size-lg:  960px;
+@value size-xl:  1280px;
+@value size-2x:  1440px;
+
+@value responsive-breakpoint:  size-xs;
+
+/* Z-index */
+@value zindex-0:  1;
+@value zindex-1:  100;
+@value zindex-2:  200;
+@value zindex-3:  300;
+@value zindex-4:  400;
+
+/* Transition */
+@value transition-control: all .2s ease;
+@value shadow-control: 0 0 0 .1rem color(primary-color a(20%));
+
+/* Grid */
+@value grid-space: calc((layout-spacing / (layout-spacing * 0 + 1)) * html-font-size);

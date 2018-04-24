@@ -1,0 +1,54 @@
+// Button variant mixin
+.button-variant /* color: primary-color */ {
+  background: color;
+  border-color: color(color lightness(-3%));
+  color: light-color;
+  &:focus {
+    @include control-shadow(color);
+  }
+  &:focus,
+  &:hover {
+    background: color(color lightness(-2%));
+    border-color: color(color lightness(-5%));
+    color: light-color;
+  }
+  &:active,
+  &.active {
+    background: color(color lightness(-7%));
+    border-color: color(color lightness(-10%));
+    color: light-color;
+  }
+  &.loading {
+    &::after {
+      border-bottom-color: light-color;
+      border-left-color: light-color;
+    }
+  }
+}
+
+@define-mixin button-outline-variant color: primary-color {
+  background: light-color;
+  border-color: color;
+  color: color;
+  &:focus {
+    @include control-shadow(color);
+  }
+  &:focus,
+  &:hover {
+    background: color(color lightness(+50%));
+    border-color: color(color lightness(-2%));
+    color: color;
+  }
+  &:active,
+  &.active {
+    background: color;
+    border-color: color(color lightness(-5%));
+    color: light-color;
+  }
+  &.loading {
+    &::after {
+      border-bottom-color: color;
+      border-left-color: color;
+    }
+  }
+}
