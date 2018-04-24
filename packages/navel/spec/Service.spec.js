@@ -15,6 +15,11 @@ describe('Service', () => {
             expect(SampleService('sample') instanceof SampleService).toBe(true);
         });
 
+        it('properly names the new factory function', () => {
+            const SampleService = Service.define('SampleService');
+            expect(SampleService.name).toBe('SampleService');
+        });
+
         it('instances of the defined service are instances of Service', () => {
             expect(Service.define('SampleService')('sample') instanceof Service).toBe(true);
         });

@@ -186,8 +186,6 @@ const Kernel = Service.define('Kernel', {
         this.configPath = null;
         this['service:register']({service: this}, this.source);
 
-        process.title = `${this.name}`;
-
         debug(`set process title for ${process.pid} to ${process.title}`);
     },
 
@@ -359,6 +357,7 @@ const Kernel = Service.define('Kernel', {
         // Build services from a configuration file.
         boot(config) {
             debug('booting');
+            process.title = `${this.name}`;
             return Future.of(config)
                 .chain((config) => {
                     const serviceDefs = config.services;

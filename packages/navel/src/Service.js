@@ -163,7 +163,7 @@ merge(Service.prototype, {
     _deregisterSubscriptionHandler(handler) {
         if (this[handlerLookup$].has(handler)) {
             const {action, references} = this[handlerLookup$].get(handler);
-            console.log('action', action, 'references', references);
+            // console.log('action', action, 'references', references);
             if (references <= 1) {
                 this[handlerLookup$].delete(handler);
                 this[handlers$].delete(action);
