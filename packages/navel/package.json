@@ -4,8 +4,8 @@
   "description": "Application service bus for node",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine",
-    "coverage": "./node_modules/.bin/nyc npm test"
+    "test": "jest --coverage",
+    "coverage": "nyc npm test"
   },
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
@@ -23,8 +23,7 @@
     "uuidv4": "^0.5.0"
   },
   "devDependencies": {
-    "jasmine": "^2.8.0",
-    "jasmine-spec-reporter": "^4.2.1",
+    "jest": "^22.4.3",
     "nyc": "^11.2.1"
   },
   "nyc": {
