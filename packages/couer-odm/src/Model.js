@@ -129,6 +129,7 @@ function createModel(model, registry, name, propDefs, options = {}) {
             const loaded = schema.update(values);
             const changeset = new Set(this[changeset$]);
             Object.keys(loaded).forEach((key) => {
+                // TODO: only add to changeset if value is different than current value
                 changeset.add(key);
             });
 
