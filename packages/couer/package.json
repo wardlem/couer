@@ -1,6 +1,6 @@
 {
   "name": "couer",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,17 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "bytes": "^3.0.0",
-    "couer-auth": "*",
-    "couer-eventemitter": "*",
-    "couer-httpserver": "*",
-    "couer-odm": "*",
-    "couer-restapi": "*",
-    "couer-router": "*",
-    "couer-session": "*",
-    "couer-store": "*",
-    "couer-ui": "*",
-    "couer-util": "*",
-    "navel": "*",
+    "couer-auth": "^1.0.0-alpha.1",
+    "couer-eventemitter": "^1.0.0-alpha.1",
+    "couer-httpserver": "^1.0.0-alpha.1",
+    "couer-odm": "^1.0.0-alpha.1",
+    "couer-restapi": "^1.0.0-alpha.1",
+    "couer-router": "^1.0.0-alpha.1",
+    "couer-session": "^1.0.0-alpha.1",
+    "couer-store": "^1.0.0-alpha.1",
+    "couer-ui": "^1.0.0-alpha.1",
+    "couer-util": "^1.0.0-alpha.1",
+    "navel": "^1.0.0-alpha.1",
     "ramda": "^0.25.0"
   },
   "devDependencies": {

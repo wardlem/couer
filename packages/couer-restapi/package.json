@@ -1,6 +1,6 @@
 {
   "name": "couer-restapi",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "Rest api generator for couer",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "bytes": "^3.0.0",
-    "couer-httpserver": "*",
-    "couer-odm": "*",
-    "couer-util": "*",
+    "couer-httpserver": "^1.0.0-alpha.1",
+    "couer-odm": "^1.0.0-alpha.1",
+    "couer-util": "^1.0.0-alpha.1",
     "data2xml": "^1.2.5",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",

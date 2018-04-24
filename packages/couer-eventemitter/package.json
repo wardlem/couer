@@ -1,6 +1,6 @@
 {
   "name": "couer-eventemitter",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "description": "Flutures based event emitter intended to be used as a part of couer",
   "main": "EventEmitter.js",
   "scripts": {
