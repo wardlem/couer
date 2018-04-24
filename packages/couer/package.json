@@ -1,6 +1,6 @@
 {
   "name": "couer",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,17 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "bytes": "^3.0.0",
-    "couer-auth": "^1.0.0-alpha.1",
-    "couer-eventemitter": "^1.0.0-alpha.1",
-    "couer-httpserver": "^1.0.0-alpha.1",
-    "couer-odm": "^1.0.0-alpha.1",
-    "couer-restapi": "^1.0.0-alpha.1",
-    "couer-router": "^1.0.0-alpha.1",
-    "couer-session": "^1.0.0-alpha.1",
-    "couer-store": "^1.0.0-alpha.1",
-    "couer-ui": "^1.0.0-alpha.1",
-    "couer-util": "^1.0.0-alpha.1",
-    "navel": "^1.0.0-alpha.1",
+    "couer-auth": "^1.0.0-alpha.2",
+    "couer-eventemitter": "^1.0.0-alpha.2",
+    "couer-httpserver": "^1.0.0-alpha.2",
+    "couer-odm": "^1.0.0-alpha.2",
+    "couer-restapi": "^1.0.0-alpha.2",
+    "couer-router": "^1.0.0-alpha.2",
+    "couer-session": "^1.0.0-alpha.2",
+    "couer-store": "^1.0.0-alpha.2",
+    "couer-ui": "^1.0.0-alpha.2",
+    "couer-util": "^1.0.0-alpha.2",
+    "navel": "^1.0.0-alpha.2",
     "ramda": "^0.25.0"
   },
   "devDependencies": {

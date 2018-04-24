@@ -1,6 +1,6 @@
 {
   "name": "couer-httpserver",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "HTTP server module for couer",
   "main": "index.js",
   "scripts": {
@@ -16,8 +16,8 @@
     "content-type": "^1.0.4",
     "cookie": "^0.3.1",
     "cookie-signature": "^1.1.0",
-    "couer-router": "^1.0.0-alpha.1",
-    "couer-util": "^1.0.0-alpha.1",
+    "couer-router": "^1.0.0-alpha.2",
+    "couer-util": "^1.0.0-alpha.2",
     "debug": "^3.1.0",
     "encodeurl": "^1.0.1",
     "fluture": "^8.0.2",
@@ -25,7 +25,7 @@
     "merge-descriptors": "^1.0.1",
     "mime": "^2.2.0",
     "mkdirp": "^0.5.1",
-    "navel": "^1.0.0-alpha.1",
+    "navel": "^1.0.0-alpha.2",
     "on-finished": "^2.3.0",
     "qs": "^6.5.1",
     "ramda": "^0.25.0",

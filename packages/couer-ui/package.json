@@ -1,6 +1,6 @@
 {
   "name": "couer-ui",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "UI component for couer",
   "main": "index.js",
   "scripts": {
@@ -13,8 +13,8 @@
   "dependencies": {
     "browserify": "16.1.1",
     "bytes": "^3.0.0",
-    "couer-router": "^1.0.0-alpha.1",
-    "couer-util": "^1.0.0-alpha.1",
+    "couer-router": "^1.0.0-alpha.2",
+    "couer-util": "^1.0.0-alpha.2",
     "css-modulesify": "^0.28.0",
     "debug": "^3.1.0",
     "fluture": "^7.1.2",
