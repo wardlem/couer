@@ -13,5 +13,5 @@ indent_style = space
 trim_trailing_whitespace = true
 
 # 2-space indent for some file types
-[*.{json,html,yml}]
+[*.{json,html,yml,css}]
 indent_size = 2
