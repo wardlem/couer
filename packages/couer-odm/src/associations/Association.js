@@ -79,7 +79,7 @@ module.exports = function(getModelByName) {
         getAssociatedModel: function() {
             return getModelByName(this.meta.associatedWith);
         },
-        get isAssociation() { return true; },
+        get isassociation() { return true; },
         associatedWith: function(other) {
             return this.withMeta('associatedWith', other);
         },

@@ -360,7 +360,7 @@ const Kernel = Service.define('Kernel', {
             process.title = `${this.name}`;
             return Future.of(config)
                 .chain((config) => {
-                    const serviceDefs = config.services;
+                    const serviceDefs = config.services || {};
 
                     const registerFutures = Object.keys(serviceDefs).map((serviceName) => {
                         const serviceDef = serviceDefs[serviceName];

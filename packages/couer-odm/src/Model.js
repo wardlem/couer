@@ -76,7 +76,7 @@ function createModel(model, registry, name, propDefs, options = {}) {
     //     }, null);
     // }
 
-    const associations = R.filter((v) => v.isAssociation, propDefs);
+    const associations = R.filter((v) => v.isassociation, propDefs);
     const storedProperties = R.omit(Object.keys(associations), propDefs);
 
     const schema = R.is(Schema, propDefs) ? propDefs : Schema(propDefs);
@@ -282,7 +282,7 @@ function createModel(model, registry, name, propDefs, options = {}) {
             const AssociatedModel = registry.get(associatedWith);
 
             const localValues = models.reduce((res, model) => res.concat(unwind ? model[localField] : [model[localField]]), []);
-            const query = {[foreignField]: {$in: Array.from(new Set(localValues))}};
+            let query = {[foreignField]: {$in: Array.from(new Set(localValues))}};
             const test = new RegExp(`^${key}\\.`);
             const subInclude = Array.from(include.reduce((set, key) => {
                 if (R.is(String, key) && test.test(key)) {
@@ -292,7 +292,22 @@ function createModel(model, registry, name, propDefs, options = {}) {
                 return set;
             }, new Set()));
 
-            const subOptions = Object.assign({}, options, {include: subInclude});
+            let subFilter = {};
+            if (options.subFilter) {
+                if (options.subFilter[key]) {
+                    query = appendQuery(options.subFilter[key]);
+                }
+
+                subFilter = Object.keys(options.subFilter).reduce((res, subFilterKey) => {
+                    if (test.test(subFilterKey)) {
+                        res[subFilterKey.replace(test, '')] = options.subFilter[subFilterKey];
+                    }
+
+                    return res;
+                }, {});
+            }
+
+            const subOptions = Object.assign({}, options, {include: subInclude, subFilter});
 
             return AssociatedModel.findMany(query, subOptions)
                 .map((results) => [key, results]);
@@ -353,6 +368,11 @@ function createModel(model, registry, name, propDefs, options = {}) {
 
         return query;
     }
+
+    Model.count = function count(query, options = {}) {
+        query = checkSoftDelete(query, options);
+        return Model.repo.count(query, options);
+    };
 
     Model.findMany = function findMany(query, options = {}) {
         query = checkSoftDelete(query, options);

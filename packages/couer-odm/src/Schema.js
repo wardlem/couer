@@ -60,7 +60,7 @@ mergeDescriptors(Schema.prototype, {
             const prop = props[key];
 
             // todo: make more generic
-            if (prop.isAssociation || prop.istemp) {
+            if (prop.isassociation || prop.istemp) {
                 return result;
             }
             result[key] = prop.unload(model[key]);
@@ -73,6 +73,27 @@ mergeDescriptors(Schema.prototype, {
         return options.stylize('Schema', 'special') + ' ' + require('util').inspect({
             properties: this.properties,
         }, depth, options);
+    },
+    hasProperty(key) {
+        return this.properties[key] != null;
+    },
+    withProperty(key, prop) {
+        return Schema(Object.assign({}, this.properties, {[key]: prop}));
+    },
+    get hiddenKeys() {
+        return new Set(Object.keys(this.properties).filter((key) => {
+            return this.properties[key].protected;
+        }));
+    },
+    get associatedKeys() {
+        return new Set(Object.keys(this.properties).filter((key) => {
+            return this.properties[key].isassociation;
+        }));
+    },
+    get storedKeys() {
+        return new Set(Object.keys(this.properties).filter((key) => {
+            return !this.properties[key].isassociation && !this.properties[key].istemp;
+        }));
     },
 });
 

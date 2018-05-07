@@ -25,6 +25,7 @@ const CouerHttpServer = Service.define('CouerHttpServer', {
         configure(options) {
 
             this.pipeline = options.pipeline;
+            this.pipelineConfig = options.pipelineConfig || {};
             this.port = options.port || 4000;
 
             return 'ok';
@@ -41,6 +42,10 @@ const CouerHttpServer = Service.define('CouerHttpServer', {
                 pipeline = require(pipelinePath);
             } catch (e) {
                 return Future.reject(e);
+            }
+
+            if (R.is(Function, pipeline)) {
+                pipeline = pipeline(this.pipelineConfig, this);
             }
 
             debug(`starting server ${this.name} at port ${this.port}`);

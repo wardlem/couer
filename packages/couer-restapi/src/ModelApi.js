@@ -503,7 +503,7 @@ mergeDescriptors(ModelApi.prototype, {
                     return Future.reject(createHttpError(500, 'Internal Server Error'));
                 }
 
-                if (!prop.isAssociation) {
+                if (!prop.isassociation) {
                     debug('Included property is not an association: %s', incl);
                     return Future.reject(createHttpError(500, 'Internal Server Error'));
                 }

@@ -11,7 +11,7 @@ const methods = module.exports = function methods(methods, route, action) {
     methods = methods.map((m) => m.toUpperCase());
     return (req, res) => {
         const reqmethod = req.method.toUpperCase();
-        const methodMatches = methods.reduce((matches, method) => matches || method === reqmethod, false);
+        const methodMatches = methods.reduce((matches, method) => matches || method === reqmethod || method === '*', false);
         if (!methodMatches) {
             return Pipeline.next(req, res);
         }
@@ -31,6 +31,7 @@ const methods = module.exports = function methods(methods, route, action) {
 };
 
 Object.assign(methods, {
+    all: (route, action) => methods(['*'], route, action),
     get: (route, action) => methods(['GET', 'HEAD'], route, action),
     head: (route, action) => methods(['HEAD'], route, action),
     post: (route, action) => methods(['POST'], route, action),

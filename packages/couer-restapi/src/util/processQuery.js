@@ -72,6 +72,7 @@ function processQuery(schema, filter) {
                 case 'nin':
                     let usevalue = def[defkey];
                     if (!Array.isArray(usevalue)) {
+                        // TODO: I think this is broken
                         usevalue = usevalue ? usevalue.split(',') : [];
                     }
                     usevalue = usevalue.map((v) => processValue(schema, key, v));
