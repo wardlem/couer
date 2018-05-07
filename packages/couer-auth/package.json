@@ -1,6 +1,6 @@
 {
   "name": "couer-auth",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "Authorization library for couer",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bytes": "^3.0.0",
-    "couer-router": "^1.0.0-alpha.2",
+    "couer-router": "^1.0.0-alpha.3",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",
     "http-errors": "^1.6.2",
