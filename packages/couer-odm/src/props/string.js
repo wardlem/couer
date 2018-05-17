@@ -53,12 +53,30 @@ module.exports = Property.extend({
                 return ['maxlen', `length must be no more than ${pluralize('character', prop.meta.maxlen, true)} long`];
             }
 
-            if (prop.meta.allow && !prop.meta.allow.includes(value)) {
-                return ['allow', 'is not an allowed value'];
+            if (prop.meta.allow) {
+                const {allow} = prop.meta;
+                for (let i = 0; i < allow.length; i += 1) {
+                    if (allow[i] instanceof RegExp) {
+                        if (!allow[i].test(value)) {
+                            return ['allow', 'is not an allowed value'];
+                        }
+                    } else if (value !== allow[i]) {
+                        return ['allow', 'is not an allowed value'];
+                    }
+                }
             }
 
-            if (prop.meta.ban.includes(value)) {
-                return ['ban', 'is not an allowed value'];
+            if (prop.meta.ban) {
+                const {ban} = prop.meta;
+                for (let i = 0; i < ban.length; i += 1) {
+                    if (ban[i] instanceof RegExp) {
+                        if (ban[i].test(value)) {
+                            return ['ban', 'is not an allowed value'];
+                        }
+                    } else if (value === ban[i]) {
+                        return ['ban', 'is not an allowed value'];
+                    }
+                }
             }
 
             if (prop.meta.match && !(new RegExp(prop.meta.match).test(value))) {

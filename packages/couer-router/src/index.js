@@ -9,6 +9,7 @@ Object.assign(exports, {
     post: methods.post,
     put: methods.put,
     patch: methods.patch,
+    all: methods.all,
     'delete': methods.delete,
     scope: require('./scope'),
     overrideMethod: require('./overrideMethod'),

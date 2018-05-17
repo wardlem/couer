@@ -295,7 +295,7 @@ function createModel(model, registry, name, propDefs, options = {}) {
             let subFilter = {};
             if (options.subFilter) {
                 if (options.subFilter[key]) {
-                    query = appendQuery(options.subFilter[key]);
+                    query = appendQuery(query, options.subFilter[key]);
                 }
 
                 subFilter = Object.keys(options.subFilter).reduce((res, subFilterKey) => {

@@ -11,6 +11,8 @@ const ValidationError = function ValidationError(model, failures, message, info)
     this.model = model;
     this.failures = failures;
     this.info = info || {};
+    this.statusCode = 422;
+    this.expose = true;
 };
 
 ValidationError.prototype = Object.create(Error.prototype);
