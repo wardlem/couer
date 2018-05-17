@@ -1,6 +1,6 @@
 {
   "name": "navel",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "Application service bus for node",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "fluture": "^7.1.2",
     "js-yaml": "^3.10.0",
     "merge-descriptors": "^1.0.1",
-    "navel-pattern": "^1.0.0-alpha.4",
+    "navel-pattern": "^1.0.0-alpha.5",
     "obj-to-table": "^2.0.0",
     "ps-node": "^0.1.6",
     "ramda": "^0.25.0",

@@ -1,6 +1,6 @@
 {
   "name": "navel-pattern",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "Pattern matching and dispatch library for navel",
   "main": "index.js",
   "scripts": {
