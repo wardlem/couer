@@ -55,14 +55,21 @@ module.exports = Property.extend({
 
             if (prop.meta.allow) {
                 const {allow} = prop.meta;
+                let found = false;
                 for (let i = 0; i < allow.length; i += 1) {
                     if (allow[i] instanceof RegExp) {
-                        if (!allow[i].test(value)) {
-                            return ['allow', 'is not an allowed value'];
+                        if (allow[i].test(value)) {
+                            found = true;
+                            break;
                         }
-                    } else if (value !== allow[i]) {
-                        return ['allow', 'is not an allowed value'];
+                    } else if (allow[i] === value) {
+                        found = true;
+                        break;
                     }
+                }
+
+                if (!found) {
+                    return ['allow', 'is not an allowed value'];
                 }
             }
 
