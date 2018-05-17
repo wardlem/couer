@@ -1,6 +1,6 @@
 {
   "name": "couer-store",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Provides the base storage type for couer storage engines",
   "main": "Store.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bytes": "^3.0.0",
-    "navel": "^1.0.0-alpha.3",
+    "navel": "^1.0.0-alpha.4",
     "ramda": "^0.25.0"
   }
 }

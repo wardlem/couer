@@ -1,6 +1,6 @@
 {
   "name": "couer-session",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Session handling middleware for Couer",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Mark Wardle <mwwardle@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "couer-router": "^1.0.0-alpha.3",
+    "couer-router": "^1.0.0-alpha.4",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",
     "merge-descriptors": "^1.0.1",

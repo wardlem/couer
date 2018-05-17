@@ -1,6 +1,6 @@
 {
   "name": "couer-util",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Utilities for couer",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "bytes": "^3.0.0",
     "content-type": "^1.0.4",
-    "navel": "^1.0.0-alpha.3",
+    "navel": "^1.0.0-alpha.4",
     "ramda": "^0.25.0",
     "url-pattern": "^1.0.3"
   }

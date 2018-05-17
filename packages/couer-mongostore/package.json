@@ -1,6 +1,6 @@
 {
   "name": "couer-mongostore",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "Mongo storage engine for couer",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bytes": "^3.0.0",
-    "couer-store": "^1.0.0-alpha.3",
+    "couer-store": "^1.0.0-alpha.4",
     "debug": "^3.1.0",
     "fluture": "^8.0.1",
     "mongodb": "^3.0.5",
